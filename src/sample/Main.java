@@ -18,6 +18,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         });
+		wel.openLifeBtn.setOnAction(event -> {});
 	}
 
 	public static void main(String[] args) {
