@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -29,17 +27,14 @@ public class Editor extends Application {
 		pane.add(canvas, 0, 0, 1, 2);
 
 		Button playBtn = new Button("Start");
-		playBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				drawGrid(canvas, worldGrid, Color.BLACK);
-				if (Objects.equals(playBtn.getText(), "Start")) {
-					playBtn.setText("Stop");
-				} else {
-					playBtn.setText("Start");
-				}
-			}
-		});
+		playBtn.setOnAction(event -> {
+            drawGrid(canvas, worldGrid, Color.BLACK);
+            if (Objects.equals(playBtn.getText(), "Start")) {
+                playBtn.setText("Stop");
+            } else {
+                playBtn.setText("Start");
+            }
+        });
 		pane.add(playBtn, 2, 0);
 
 		primaryStage.setScene(new Scene(pane));
@@ -59,11 +54,11 @@ public class Editor extends Application {
 
 		int i, j;
 
-		for (i = 1; i < grid.width; i++) {
+		for (i = 0; i <= grid.width; i++) {
 			gc.strokeLine(i * 1. / grid.width * canvas.getWidth(), 0,
 			              i * 1. / grid.width * canvas.getWidth(), canvas.getWidth());
 		}
-		for (i = 1; i < grid.height; i++) {
+		for (i = 0; i <= grid.height; i++) {
 			gc.strokeLine(0, i * 1. / grid.height * canvas.getHeight(),
 			              canvas.getWidth(), i * 1. / grid.height * canvas.getHeight());
 		}
