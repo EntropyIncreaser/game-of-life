@@ -33,6 +33,7 @@ public class Editor extends Application {
                 playBtn.setText("Stop");
             } else {
                 playBtn.setText("Start");
+	            // TODO: make the world evolve
             }
         });
 		pane.add(playBtn, 2, 0);

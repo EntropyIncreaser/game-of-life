@@ -11,6 +11,7 @@ public class Main extends Application {
 		Editor editor = new Editor(20);
 		wel.start(primaryStage);
 		wel.newLifeBtn.setOnAction(event -> {
+			// TODO: select width
             primaryStage.hide();
             try {
                 editor.start(primaryStage);
@@ -19,6 +20,7 @@ public class Main extends Application {
             }
         });
 		wel.openLifeBtn.setOnAction(event -> {});
+		// TODO: browse file
 	}
 
 	public static void main(String[] args) {
