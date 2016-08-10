@@ -11,6 +11,5 @@
 	<Button fx:id="startButton"
 	        text="start"
 	        GridPane.rowIndex="0"
-	        GridPane.columnIndex="2"
-	        onAction="#handlePlayButtonAction"/>
+	        GridPane.columnIndex="2"/>
 </GridPane>
