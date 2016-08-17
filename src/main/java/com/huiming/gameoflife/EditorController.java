@@ -1,10 +1,10 @@
 package com.huiming.gameoflife;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 
 public class EditorController {
 	@FXML public Canvas worldCanvas;
-	@FXML public Button startButton;
+	@FXML public JFXButton startButton;
 }

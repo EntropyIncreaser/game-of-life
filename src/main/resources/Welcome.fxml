@@ -1,7 +1,6 @@
-<?import javafx.scene.layout.GridPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
 <GridPane alignment="CENTER" hgap="10" vgap="10"
 		  fx:controller="com.huiming.gameoflife.WelcomeController" xmlns:fx="http://javafx.com/fxml">
 	<Text text="Welcome to Game of Life"
@@ -10,13 +9,13 @@
 
 	<HBox GridPane.rowIndex="0"
 	      GridPane.columnIndex="1">
-		<Button fx:id="newLifeButton"
-		        text="Create a New Space"/>
+		<JFXButton fx:id="newLifeButton"
+				   text="Create a New Space" styleClass="button-raised"/>
 	</HBox>
 
 	<HBox GridPane.rowIndex="0"
 	      GridPane.columnIndex="2">
-	<Button fx:id="openLifeButton"
-	        text="Open a Space"/>
+	<JFXButton fx:id="openLifeButton"
+			text="Open a Space" styleClass="button-raised"/>
 	</HBox>
 </GridPane>

@@ -1,11 +1,11 @@
 package com.huiming.gameoflife;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -26,7 +26,7 @@ public class Editor extends Application {
 		drawGrid(canvas, worldGrid, Color.BLACK);
 		pane.add(canvas, 0, 0, 1, 2);
 
-		Button playBtn = new Button("Start");
+		JFXButton playBtn = new JFXButton("Start");
 		playBtn.setOnAction(event -> {
             drawGrid(canvas, worldGrid, Color.BLACK);
             if (Objects.equals(playBtn.getText(), "Start")) {
@@ -65,7 +65,7 @@ public class Editor extends Application {
 		}
 		for (i = 0; i < grid.width; i++) {
 			for (j = 0; j < grid.height; j++) {
-				if (grid.grid[i][j]) {
+				if (grid.gridMatrix[i][j]) {
 					gc.fillRect(i * 1. / grid.width * canvas.getWidth(),
 					            j * 1. / grid.height * canvas.getHeight(),
 					            canvas.getWidth() * 1. / grid.width,

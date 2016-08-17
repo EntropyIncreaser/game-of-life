@@ -1,10 +1,10 @@
 package com.huiming.gameoflife;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Welcome extends Application {
-	Button newLifeBtn, openLifeBtn;
+	JFXButton newLifeBtn, openLifeBtn;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -26,8 +26,10 @@ public class Welcome extends Application {
 		title.setFont(Font.font(25));
 		grid.add(title, 0, 0);
 
-		newLifeBtn  = new Button("Create a New Space");
-		openLifeBtn = new Button("Open a Space");
+		newLifeBtn  = new JFXButton("Create a New Space");
+		newLifeBtn.getStyleClass().add("button-raised");
+		openLifeBtn = new JFXButton("Open a Space");
+		openLifeBtn.getStyleClass().add("button-raised");
 		HBox HnlBtn = new HBox(newLifeBtn), HolBtn = new HBox(openLifeBtn);
 		HnlBtn.setAlignment(Pos.CENTER);
 		HolBtn.setAlignment(Pos.CENTER);

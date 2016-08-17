@@ -1,9 +1,9 @@
 package com.huiming.gameoflife;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class WelcomeController {
-	@FXML public Button newLifeButton;
-	@FXML public Button openLifeButton;
+	@FXML public JFXButton newLifeButton;
+	@FXML public JFXButton openLifeButton;
 }
