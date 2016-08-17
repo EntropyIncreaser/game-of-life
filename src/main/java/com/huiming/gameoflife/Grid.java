@@ -1,4 +1,4 @@
-package sample;
+package com.huiming.gameoflife;
 
 import java.io.*;
 import java.util.Objects;

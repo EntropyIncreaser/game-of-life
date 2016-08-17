@@ -1,4 +1,4 @@
-package sample;
+package com.huiming.gameoflife;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
