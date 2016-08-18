@@ -1,4 +1,4 @@
-package com.huiming.gameoflife.util;
+package com.huiming.gameoflife.util.grid;
 
 /**
  * A position in a Grid.
@@ -68,5 +68,32 @@ public class GridPos {
 	public GridPos setY(int y) {
 		this.y = y;
 		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		GridPos gridPos = (GridPos) o;
+
+		if (x != gridPos.x) return false;
+		return y == gridPos.y;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = x;
+		result = 31 * result + y;
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "GridPos{" +
+			"x=" + x +
+			", y=" + y +
+			'}';
 	}
 }

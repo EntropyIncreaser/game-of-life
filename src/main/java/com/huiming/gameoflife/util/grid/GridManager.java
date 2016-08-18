@@ -1,4 +1,4 @@
-package com.huiming.gameoflife;
+package com.huiming.gameoflife.util.grid;
 
 import java.util.ArrayList;
 import java.util.List;

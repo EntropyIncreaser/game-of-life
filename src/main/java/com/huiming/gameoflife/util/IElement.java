@@ -1,6 +1,8 @@
 package com.huiming.gameoflife.util;
 
-public interface IElement<T> extends Comparable<IElement<T>> {
+import java.io.Serializable;
+
+public interface IElement<T> extends Comparable<IElement<T>>, Serializable {
 	T getValue();
 	IElement setValue(T value);
 }

@@ -1,5 +1,6 @@
-package com.huiming.gameoflife;
+package com.huiming.gameoflife.gui;
 
+import com.huiming.gameoflife.GameOfLife;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.application.Application;
@@ -15,8 +16,8 @@ import javafx.stage.Stage;
 import java.util.Locale;
 
 public class Welcome extends Application {
-	JFXButton newLifeBtn, openLifeBtn;
-	JFXComboBox<Locale> comboBox;
+	public JFXButton newLifeBtn, openLifeBtn;
+	public JFXComboBox<Locale> comboBox;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -51,6 +52,8 @@ public class Welcome extends Application {
 		comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
 			GameOfLife.locale = comboBox.getValue() == null ? GameOfLife.locale : comboBox.getValue();
         });
+
+
 
 		grid.add(comboBox, 0, 3);
 

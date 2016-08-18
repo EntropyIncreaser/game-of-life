@@ -1,4 +1,6 @@
-package com.huiming.gameoflife.util;
+package com.huiming.gameoflife.util.grid;
+
+import com.huiming.gameoflife.util.IElement;
 
 public class GridElement implements IElement<Boolean> {
 	private boolean value;
@@ -25,5 +27,17 @@ public class GridElement implements IElement<Boolean> {
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Boolean && value == (Boolean) obj;
+	}
+
+	@Override
+	public int hashCode() {
+		return (value ? 1 : 0);
+	}
+
+	@Override
+	public String toString() {
+		return "GridElement{" +
+			"value=" + value +
+			'}';
 	}
 }

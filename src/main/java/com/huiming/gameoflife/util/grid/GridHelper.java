@@ -1,6 +1,4 @@
-package com.huiming.gameoflife.util;
-
-import com.huiming.gameoflife.Grid;
+package com.huiming.gameoflife.util.grid;
 
 /**
  * Useful functions for a Grid.

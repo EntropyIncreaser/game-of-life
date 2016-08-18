@@ -1,6 +1,7 @@
-package com.huiming.gameoflife;
+package com.huiming.gameoflife.gui;
 
-import com.huiming.gameoflife.util.GridPos;
+import com.huiming.gameoflife.util.grid.Grid;
+import com.huiming.gameoflife.util.grid.GridPos;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -46,6 +47,12 @@ public class Editor extends Application {
             }
         });
 		pane.add(playBtn, 2, 0);
+
+		JFXButton saveBtn = new JFXButton("Save");
+		saveBtn.setOnAction(event -> {
+
+		});
+		pane.add(saveBtn, 2, 1);
 
 		primaryStage.setScene(new Scene(pane));
 		primaryStage.setTitle("World Editor");

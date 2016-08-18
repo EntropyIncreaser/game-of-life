@@ -1,4 +1,4 @@
-package com.huiming.gameoflife;
+package com.huiming.gameoflife.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;

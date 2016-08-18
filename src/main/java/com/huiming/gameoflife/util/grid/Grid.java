@@ -1,13 +1,12 @@
-package com.huiming.gameoflife;
+package com.huiming.gameoflife.util.grid;
 
 import com.huiming.gameoflife.util.ElementNotFoundException;
-import com.huiming.gameoflife.util.GridElement;
-import com.huiming.gameoflife.util.GridPos;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class Grid {
+public class Grid implements Iterable<GridElement> {
 	private Map<GridPos, GridElement> matrix = new HashMap<>();
 	private int width, height;
 
@@ -83,5 +82,31 @@ public class Grid {
 
 	public GridPos[] keyArray() {
 		return (GridPos[]) matrix.keySet().toArray();
+	}
+
+	@Override
+	public Iterator<GridElement> iterator() {
+		return matrix.values().iterator();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Grid that = (Grid) o;
+
+		if (width != that.width) return false;
+		if (height != that.height) return false;
+		return matrix.equals(that.matrix);
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = matrix.hashCode();
+		result = 31 * result + width;
+		result = 31 * result + height;
+		return result;
 	}
 }
