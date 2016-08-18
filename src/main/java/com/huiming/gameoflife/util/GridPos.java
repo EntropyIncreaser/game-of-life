@@ -7,6 +7,15 @@ package com.huiming.gameoflife.util;
 public class GridPos {
 	private int x, y;
 
+	public GridPos() {
+		this(0, 0);
+	}
+
+	public GridPos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public GridPos up() {
 		return up(1);
 	}
@@ -47,15 +56,17 @@ public class GridPos {
 		return x;
 	}
 
-	public void setX(int x) {
+	public GridPos setX(int x) {
 		this.x = x;
+		return this;
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public GridPos setY(int y) {
 		this.y = y;
+		return this;
 	}
 }

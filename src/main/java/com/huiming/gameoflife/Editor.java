@@ -1,5 +1,6 @@
 package com.huiming.gameoflife;
 
+import com.huiming.gameoflife.util.GridPos;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -13,7 +14,15 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class Editor extends Application {
-	public Grid worldGrid;
+	private Grid worldGrid;
+
+	public Grid getWorldGrid() {
+		return worldGrid;
+	}
+
+	public void setWorldGrid(Grid worldGrid) {
+		this.worldGrid = worldGrid;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -43,8 +52,12 @@ public class Editor extends Application {
 		primaryStage.show();
 	}
 
-	public Editor(int width) {
-		worldGrid = new Grid(width, width);
+	public Editor(Grid grid) {
+		worldGrid = grid;
+	}
+
+	public Editor(int width, int height) {
+		worldGrid = new Grid(width, height);
 	}
 
 	public void drawGrid(Canvas canvas, Grid grid, Color color) {
@@ -55,21 +68,23 @@ public class Editor extends Application {
 
 		int i, j;
 
-		for (i = 0; i <= grid.width; i++) {
-			gc.strokeLine(i * 1. / grid.width * canvas.getWidth(), 0,
-			              i * 1. / grid.width * canvas.getWidth(), canvas.getWidth());
+		for (i = 0; i <= grid.getWidth(); i++) {
+			gc.strokeLine(i * 1. / grid.getWidth() * canvas.getWidth(), 0,
+			              i * 1. / grid.getWidth() * canvas.getWidth(), canvas.getWidth());
 		}
-		for (i = 0; i <= grid.height; i++) {
-			gc.strokeLine(0, i * 1. / grid.height * canvas.getHeight(),
-			              canvas.getWidth(), i * 1. / grid.height * canvas.getHeight());
+
+		for (i = 0; i <= grid.getHeight(); i++) {
+			gc.strokeLine(0, i * 1. / grid.getHeight() * canvas.getHeight(),
+			              canvas.getWidth(), i * 1. / grid.getHeight() * canvas.getHeight());
 		}
-		for (i = 0; i < grid.width; i++) {
-			for (j = 0; j < grid.height; j++) {
-				if (grid.gridMatrix[i][j]) {
-					gc.fillRect(i * 1. / grid.width * canvas.getWidth(),
-					            j * 1. / grid.height * canvas.getHeight(),
-					            canvas.getWidth() * 1. / grid.width,
-					            canvas.getHeight() * 1. / grid.height);
+
+		for (i = 0; i < grid.getWidth(); i++) {
+			for (j = 0; j < grid.getHeight(); j++) {
+				if (grid.getElement(new GridPos(i, j)).getValue()) {
+					gc.fillRect(i * 1. / grid.getWidth() * canvas.getWidth(),
+					            j * 1. / grid.getHeight() * canvas.getHeight(),
+					            canvas.getWidth() * 1. / grid.getWidth(),
+					            canvas.getHeight() * 1. / grid.getHeight());
 				}
 			}
 		}

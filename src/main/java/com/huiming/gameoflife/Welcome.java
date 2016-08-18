@@ -1,6 +1,7 @@
 package com.huiming.gameoflife;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,8 +12,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
 public class Welcome extends Application {
 	JFXButton newLifeBtn, openLifeBtn;
+	JFXComboBox<Locale> comboBox;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -35,6 +39,21 @@ public class Welcome extends Application {
 		HolBtn.setAlignment(Pos.CENTER);
 		grid.add(HnlBtn, 0, 1);
 		grid.add(HolBtn, 0, 2);
+
+		comboBox = new JFXComboBox<>();
+		comboBox.getItems().addAll(
+			new Locale("en", "US"),
+			Locale.SIMPLIFIED_CHINESE,
+			Locale.TRADITIONAL_CHINESE
+		);
+
+		comboBox.setPromptText("Choose a language...");
+		comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			GameOfLife.locale = comboBox.getValue() == null ? GameOfLife.locale : comboBox.getValue();
+        });
+
+		grid.add(comboBox, 0, 3);
+
 
 		primaryStage.setScene(new Scene(grid));
 		primaryStage.setTitle("Welcome");

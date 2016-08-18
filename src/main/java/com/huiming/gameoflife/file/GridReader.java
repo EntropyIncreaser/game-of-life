@@ -14,12 +14,20 @@ import java.nio.charset.Charset;
  * @author Lasm_Gratel
  */
 public class GridReader {
-	public static void readGrid(File file) {
+	/**
+	 * Read a grid from the file.
+	 * @param file a valid json file
+	 * @return grid or null
+     */
+	public static Grid readGrid(File file) {
 		Gson gson = new Gson();
 		try {
-			GridManager.addGrid(gson.fromJson(FileUtils.readFileToString(file, Charset.forName("UTF-8")), Grid.class));
+			Grid grid = gson.fromJson(FileUtils.readFileToString(file, Charset.forName("UTF-8")), Grid.class);
+			GridManager.addGrid(grid);
+			return grid;
 		} catch (Exception e) {
 			GameOfLife.LOGGER.error(e);
 		}
+		return null;
 	}
 }
