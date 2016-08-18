@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+	<string name="application_name">Game Of Life</string>
+	<string name="welcome_title">Welcome to Game Of Life</string>
+	<string name="new_game">Create a New Space</string>
+	<string name="open_game">Open a Space</string>
+</resources>
