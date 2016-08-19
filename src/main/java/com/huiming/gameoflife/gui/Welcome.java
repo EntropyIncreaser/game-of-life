@@ -17,12 +17,19 @@ import javafx.stage.Stage;
 import java.util.Locale;
 
 public class Welcome extends Application {
+	public JFXButton newLifeButton, openLifeButton;
+	public JFXComboBox<Locale> comboBox;
+	public WelcomeController controller;
+
+	public Welcome() {
+		controller = new WelcomeController();
+		comboBox = controller.comboBox;
+		newLifeButton = controller.newLifeButton;
+		openLifeButton = controller.openLifeButton;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		WelcomeController controller = new WelcomeController();
-		JFXComboBox comboBox = controller.comboBox;
-
 		comboBox.getItems().addAll(
 			new Locale("en", "US"),
 			Locale.SIMPLIFIED_CHINESE,

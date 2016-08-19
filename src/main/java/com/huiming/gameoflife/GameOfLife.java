@@ -27,7 +27,7 @@ public class GameOfLife extends Application {
 		Welcome wel = new Welcome();
 		Editor editor = new Editor(20, 20);
 		wel.start(primaryStage);
-		wel.newLifeBtn.setOnAction(event -> {
+		wel.newLifeButton.setOnAction(event -> {
 			// TODO: select width
 			primaryStage.hide();
 			try {
@@ -37,7 +37,7 @@ public class GameOfLife extends Application {
 			}
 		});
 
-		wel.openLifeBtn.setOnAction(event -> {
+		wel.openLifeButton.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle(I18n.parse("window.jsonchooser.title"));
 			fileChooser.getExtensionFilters().addAll(
