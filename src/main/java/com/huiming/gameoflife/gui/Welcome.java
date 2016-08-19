@@ -21,15 +21,13 @@ public class Welcome extends Application {
 	public JFXComboBox<Locale> comboBox;
 	public WelcomeController controller;
 
-	public Welcome() {
+	@Override
+	public void start(Stage primaryStage) throws Exception {
 		controller = new WelcomeController();
 		comboBox = controller.comboBox;
 		newLifeButton = controller.newLifeButton;
 		openLifeButton = controller.openLifeButton;
-	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
 		comboBox.getItems().addAll(
 			new Locale("en", "US"),
 			Locale.SIMPLIFIED_CHINESE,

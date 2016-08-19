@@ -2,6 +2,7 @@ package com.huiming.gameoflife.gui;
 
 import com.huiming.gameoflife.util.grid.Grid;
 import com.huiming.gameoflife.util.grid.GridPos;
+import com.huiming.gameoflife.gui.controller.EditorController;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -17,6 +18,10 @@ import java.util.Objects;
 public class Editor extends Application {
 	private Grid worldGrid;
 
+	public EditorController controller;
+	public Canvas worldCanvas;
+	public JFXButton playButton, saveButton;
+
 	public Grid getWorldGrid() {
 		return worldGrid;
 	}
@@ -27,34 +32,26 @@ public class Editor extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		GridPane pane = new GridPane();
-		pane.setAlignment(Pos.CENTER);
-		pane.setHgap(10);
-		pane.setVgap(10);
+		controller = new EditorController();
+		worldCanvas = controller.worldCanvas;
+		playButton = controller.playButton;
+		saveButton = controller.saveButton;
 
-		Canvas canvas = new Canvas(500, 500);
-		drawGrid(canvas, worldGrid, Color.BLACK);
-		pane.add(canvas, 0, 0, 1, 2);
+		playButton.setOnAction(event -> {
+			drawGrid(canvas, worldGrid, Color.BLACK);
+			if (Objects.equals(playButton.getText(), "Start")) {
+				playButton.setText("Stop");
+			} else {
+				playButton.setText("Start");
+				// TODO: make the world evolve
+			}
+		});
 
-		JFXButton playBtn = new JFXButton("Start");
-		playBtn.setOnAction(event -> {
-            drawGrid(canvas, worldGrid, Color.BLACK);
-            if (Objects.equals(playBtn.getText(), "Start")) {
-                playBtn.setText("Stop");
-            } else {
-                playBtn.setText("Start");
-	            // TODO: make the world evolve
-            }
-        });
-		pane.add(playBtn, 2, 0);
-
-		JFXButton saveBtn = new JFXButton("Save");
-		saveBtn.setOnAction(event -> {
+		saveButton.setOnAction(event -> {
 
 		});
-		pane.add(saveBtn, 2, 1);
 
-		primaryStage.setScene(new Scene(pane));
+		primaryStage.setScene(new Scene(controller));
 		primaryStage.setTitle("World Editor");
 		primaryStage.show();
 	}
