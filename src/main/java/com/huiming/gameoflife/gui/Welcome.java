@@ -1,6 +1,7 @@
 package com.huiming.gameoflife.gui;
 
 import com.huiming.gameoflife.GameOfLife;
+import com.huiming.gameoflife.gui.controller.WelcomeController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.application.Application;
@@ -16,49 +17,23 @@ import javafx.stage.Stage;
 import java.util.Locale;
 
 public class Welcome extends Application {
-	public JFXButton newLifeBtn, openLifeBtn;
-	public JFXComboBox<Locale> comboBox;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		WelcomeController controller = new WelcomeController();
+		JFXComboBox comboBox = controller.comboBox;
 
-		Text title = new Text("Welcome to Game of Life");
-		title.setFont(Font.font(25));
-		grid.add(title, 0, 0);
-
-		newLifeBtn  = new JFXButton("Create a New Space");
-		newLifeBtn.getStyleClass().add("button-raised");
-		openLifeBtn = new JFXButton("Open a Space");
-		openLifeBtn.getStyleClass().add("button-raised");
-		HBox HnlBtn = new HBox(newLifeBtn), HolBtn = new HBox(openLifeBtn);
-		HnlBtn.setAlignment(Pos.CENTER);
-		HolBtn.setAlignment(Pos.CENTER);
-		grid.add(HnlBtn, 0, 1);
-		grid.add(HolBtn, 0, 2);
-
-		comboBox = new JFXComboBox<>();
 		comboBox.getItems().addAll(
 			new Locale("en", "US"),
 			Locale.SIMPLIFIED_CHINESE,
 			Locale.TRADITIONAL_CHINESE
 		);
-
 		comboBox.setPromptText("Choose a language...");
 		comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
 			GameOfLife.locale = comboBox.getValue() == null ? GameOfLife.locale : comboBox.getValue();
-        });
+		});
 
-
-
-		grid.add(comboBox, 0, 3);
-
-
-		primaryStage.setScene(new Scene(grid));
+		primaryStage.setScene(new Scene(controller));
 		primaryStage.setTitle("Welcome");
 		primaryStage.show();
 	}

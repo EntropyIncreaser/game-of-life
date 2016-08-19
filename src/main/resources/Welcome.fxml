@@ -5,10 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
-<GridPane alignment="CENTER" hgap="10" vgap="10"
-          xmlns:fx="http://javafx.com/fxml/1"
-          xmlns="http://javafx.com/javafx/8.0.76-ea"
-          fx:controller="com.huiming.gameoflife.gui.controller.WelcomeController">
+
+<fx:root type="javafx.scene.layout.GridPane"
+         alignment="CENTER" hgap="10" vgap="10"
+         xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/8.0.76-ea"
+         fx:controller="com.huiming.gameoflife.gui.controller.WelcomeController">
 	<Text style="-fx-font-size: 25" text="Welcome to Game of Life" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 
 	<HBox alignment="CENTER" GridPane.rowIndex="0"
@@ -27,4 +29,4 @@
 	<padding>
 		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
 	</padding>
-</GridPane>
+</fx:root>
