@@ -84,6 +84,51 @@ public class Grid implements Iterable<GridElement> {
 		return (GridPos[]) matrix.keySet().toArray();
 	}
 
+	public void evolveInPlace(GridCelluarAutomaton gridCelluarAutomaton) {
+		Map<GridPos, int> count = new HashMap<>();
+		Map<GridPos, GridElement> newGrid = new HashMap<>();
+		int offsetX, offsetY, x, y;
+		Entry<GridPos, GridElement> elementEntry;
+		Entry<GridPos, int> countEntry;
+		for (elementEntry : matrix.entrySet()) {
+			if (elementEntry.getKey().getX() >= width ||
+			    elementEntry.getKey().getY() >= height ||
+			   !elementEntry.getValue().value) {
+				continue;
+			}
+			for (offsetX = -1; offsetX <= 1; offsetX++) {
+				for (offsetY = -1; offsetY <= 1; offsetY++) {
+					if (offsetX == 0 && offsetY == 0) {
+						continue;
+					}
+					x = elementEntry.getKey().getX() + offsetX;
+					y = elementEntry.getKey().getY() + offsetY;
+					if (!gridCelluarAutomaton.getSpaceType() &&
+					    x >= 0 && x < width && y >= 0 && y < height) {
+						continue;
+					}
+					x = (x + width) % width;
+					y = (y + height) % height;
+					if (count.containsKey(new GridPos(x, y))) {
+						count.get(new GridPos(x, y))++;
+					} else {
+						count.put(new GridPos(x, y), 1);
+					}
+				}
+			}
+		}
+		matrix.clear();
+		init();
+		for (countEntry : count.entrySet()) {
+			if (gridCelluarAutomaton.couldStay(countEntry.getValue()) &&
+			    matrix.get(countEntry.getKey()) ||
+				gridCelluarAutomaton.couldBorn(countEntry.getvalue()) &&
+				matrix.get(countEntry.getKey())) {
+				matrix.put(countEntry.getKey(), true);
+			}
+		}
+	}
+
 	@Override
 	public Iterator<GridElement> iterator() {
 		return matrix.values().iterator();
