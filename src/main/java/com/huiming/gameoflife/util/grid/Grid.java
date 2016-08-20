@@ -84,7 +84,7 @@ public class Grid implements Iterable<GridElement> {
 		return (GridPos[]) matrix.keySet().toArray();
 	}
 
-	public void evolveInPlace(GridCelluarAutomaton gridCelluarAutomaton) {
+	public void evolveInPlace(GridCellularAutomaton gridCellularAutomaton) {
 		Map<GridPos, int> count = new HashMap<>();
 		Map<GridPos, GridElement> newGrid = new HashMap<>();
 		int offsetX, offsetY, x, y;
@@ -103,7 +103,7 @@ public class Grid implements Iterable<GridElement> {
 					}
 					x = elementEntry.getKey().getX() + offsetX;
 					y = elementEntry.getKey().getY() + offsetY;
-					if (!gridCelluarAutomaton.getSpaceType() &&
+					if (!gridCellularAutomaton.getSpaceType() &&
 					    x >= 0 && x < width && y >= 0 && y < height) {
 						continue;
 					}
@@ -120,9 +120,9 @@ public class Grid implements Iterable<GridElement> {
 		matrix.clear();
 		init();
 		for (countEntry : count.entrySet()) {
-			if (gridCelluarAutomaton.couldStay(countEntry.getValue()) &&
+			if (gridCellularAutomaton.couldStay(countEntry.getValue()) &&
 			    matrix.get(countEntry.getKey()) ||
-				gridCelluarAutomaton.couldBorn(countEntry.getvalue()) &&
+				gridCellularAutomaton.couldBorn(countEntry.getvalue()) &&
 				matrix.get(countEntry.getKey())) {
 				matrix.put(countEntry.getKey(), true);
 			}
