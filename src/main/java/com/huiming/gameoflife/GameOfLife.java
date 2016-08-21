@@ -18,14 +18,15 @@ public class GameOfLife extends Application {
 	public static final Logger LOGGER = LogManager.getLogger("GameOfLife");
 	public static Locale locale = Locale.getDefault();
 
+	public static Welcome wel = new Welcome();
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Welcome wel = new Welcome();
-		Editor editor = new Editor(20, 20);
+		Editor editor = new Editor(10, 10);
 		wel.start(primaryStage);
 		wel.newLifeButton.setOnAction(event -> {
 			// TODO: select width
@@ -41,8 +42,8 @@ public class GameOfLife extends Application {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle(I18n.parse("window.jsonchooser.title"));
 			fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(I18n.parse("window.jsonchooser.extension.all"), "*.*"),
-				new FileChooser.ExtensionFilter(I18n.parse("window.jsonchooser.extension.json"), "*.json")
+				new FileChooser.ExtensionFilter(I18n.parse("extension.all"), "*.*"),
+				new FileChooser.ExtensionFilter(I18n.parse("extension.json"), "*.json")
 			);
 			fileChooser.setInitialFileName("grid.json");
 			File file = fileChooser.showOpenDialog(primaryStage);

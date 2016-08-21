@@ -6,7 +6,7 @@ public class GridObj {
 	private int width, height;
 	private GridPosElement[] data;
 
-	public class GridPosElement {
+	public static class GridPosElement {
 		private GridPos position;
 		private GridElement element;
 

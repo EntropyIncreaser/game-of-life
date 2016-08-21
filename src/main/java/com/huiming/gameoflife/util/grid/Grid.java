@@ -5,6 +5,7 @@ import com.huiming.gameoflife.util.ElementNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class Grid implements Iterable<GridElement> {
 	private Map<GridPos, GridElement> matrix = new HashMap<>();
@@ -80,8 +81,8 @@ public class Grid implements Iterable<GridElement> {
 		return this;
 	}
 
-	public GridPos[] keyArray() {
-		return (GridPos[]) matrix.keySet().toArray();
+	public Set<GridPos> keySet() {
+		return matrix.keySet();
 	}
 
 	public void evolveInPlace(GridCellularAutomaton gridCellularAutomaton) {

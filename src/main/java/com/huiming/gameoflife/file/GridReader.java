@@ -2,13 +2,16 @@ package com.huiming.gameoflife.file;
 
 import com.google.gson.Gson;
 import com.huiming.gameoflife.GameOfLife;
-import com.huiming.gameoflife.util.grid.Grid;
-import com.huiming.gameoflife.util.grid.GridManager;
-import com.huiming.gameoflife.util.grid.GridObj;
+import com.huiming.gameoflife.util.grid.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Reads Grids from the file.
@@ -36,10 +39,25 @@ public class GridReader {
 		return null;
 	}
 
-	public static void saveGrid(File file) {
+	public static void saveGrid(File file, Grid grid) {
 		Gson gson = new Gson();
 		try {
+			if(file.exists())
+				file.delete();
+			file.createNewFile();
 			GridObj obj = new GridObj();
+			List<GridObj.GridPosElement> elementList = new ArrayList<>();
+			for(GridPos pos : grid.keySet()) {
+				GridElement element = grid.getElement(pos);
+				GridObj.GridPosElement posElement = new GridObj.GridPosElement();
+				posElement.setPosition(pos);
+				posElement.setElement(element);
+				elementList.add(posElement);
+			}
+			obj.setData(elementList.toArray(new GridObj.GridPosElement[0]));
+			obj.setWidth(grid.getWidth());
+			obj.setHeight(grid.getHeight());
+			gson.toJson(obj, new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 		} catch (Exception e) {
 			GameOfLife.LOGGER.error(e);
 		}

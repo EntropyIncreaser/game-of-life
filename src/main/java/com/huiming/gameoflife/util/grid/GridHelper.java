@@ -26,10 +26,7 @@ public class GridHelper {
      */
 	public Grid resize(Grid grid, int width, int height) {
 		Grid newGrid = new Grid(width, height);
-		for (GridPos pos : grid.keyArray()) {
-			if(pos.getX() < width && pos.getY() < height)
-				newGrid.setElement(pos, grid.getElement(pos));
-		}
+		grid.keySet().stream().filter(pos -> pos.getX() < width && pos.getY() < height).forEach(pos -> newGrid.setElement(pos, grid.getElement(pos)));
 		return newGrid;
 	}
 }

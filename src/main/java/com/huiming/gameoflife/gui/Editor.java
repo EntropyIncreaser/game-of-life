@@ -1,5 +1,7 @@
 package com.huiming.gameoflife.gui;
 
+import com.huiming.gameoflife.file.GridReader;
+import com.huiming.gameoflife.util.I18n;
 import com.huiming.gameoflife.util.grid.Grid;
 import com.huiming.gameoflife.util.grid.GridPos;
 import com.huiming.gameoflife.gui.controller.EditorController;
@@ -11,9 +13,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Objects;
+
+import static com.huiming.gameoflife.GameOfLife.LOGGER;
 
 public class Editor extends Application {
 	private Grid worldGrid;
@@ -49,15 +55,25 @@ public class Editor extends Application {
 
 		saveButton.setOnAction(event -> {
 
+		JFXButton saveBtn = new JFXButton("Save");
+		saveBtn.setOnAction(event -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle(I18n.parse("window.jsonsaver.title"));
+			fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter(I18n.parse("extension.json"), "*.json")
+			);
+			fileChooser.setInitialFileName("grid.json");
+			File file = fileChooser.showSaveDialog(primaryStage);
+			try {
+				GridReader.saveGrid(file, worldGrid);
+			} catch (Exception e) {
+				LOGGER.error(e);
+			}
 		});
 
 		primaryStage.setScene(new Scene(controller));
 		primaryStage.setTitle("World Editor");
 		primaryStage.show();
-	}
-
-	public Editor(Grid grid) {
-		worldGrid = grid;
 	}
 
 	public Editor(int width, int height) {
