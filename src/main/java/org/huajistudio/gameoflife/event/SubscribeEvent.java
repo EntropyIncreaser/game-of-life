@@ -11,4 +11,6 @@ import java.lang.annotation.Target;
  * Set the annotation on a method will make the method listen a selected event.
  */
 public @interface SubscribeEvent {
+	EnumEventPriority priority() default EnumEventPriority.NORMAL;
+	boolean receiveCanceled() default false;
 }
