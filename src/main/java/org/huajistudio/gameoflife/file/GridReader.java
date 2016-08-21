@@ -3,7 +3,8 @@ package org.huajistudio.gameoflife.file;
 import com.google.gson.Gson;
 import org.huajistudio.gameoflife.GameOfLife;
 import org.apache.commons.io.FileUtils;
-import org.huajistudio.gameoflife.util.grid.*;
+import org.huajistudio.gameoflife.components.cell.Cell;
+import org.huajistudio.gameoflife.components.grid.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,7 +49,7 @@ public class GridReader {
 			GridObj obj = new GridObj();
 			List<GridObj.GridPosElement> elementList = new ArrayList<>();
 			for(GridPos pos : grid.keySet()) {
-				GridElement element = grid.getElement(pos);
+				Cell element = grid.getElement(pos);
 				GridObj.GridPosElement posElement = new GridObj.GridPosElement();
 				posElement.setPosition(pos);
 				posElement.setElement(element);

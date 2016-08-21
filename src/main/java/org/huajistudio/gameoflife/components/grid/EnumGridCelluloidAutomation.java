@@ -1,4 +1,4 @@
-package org.huajistudio.gameoflife.util.grid;
+package org.huajistudio.gameoflife.components.grid;
 
 import java.util.Arrays;
 

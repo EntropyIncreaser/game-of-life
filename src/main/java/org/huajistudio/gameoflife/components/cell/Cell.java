@@ -1,8 +1,8 @@
-package org.huajistudio.gameoflife.util.grid;
+package org.huajistudio.gameoflife.components.cell;
 
 import org.huajistudio.gameoflife.util.IElement;
 
-public class GridElement implements IElement<Boolean> {
+public class Cell implements IElement<Boolean> {
 	private boolean value;
 	private double[] rgba;
 
@@ -12,12 +12,12 @@ public class GridElement implements IElement<Boolean> {
 	}
 
 	@Override
-	public GridElement setValue(Boolean value) {
+	public Cell setValue(Boolean value) {
 		this.value = value;
 		return this;
 	}
 
-	public GridElement swap() {
+	public Cell swap() {
 		value = !value;
 		return this;
 	}
@@ -26,7 +26,7 @@ public class GridElement implements IElement<Boolean> {
 		return rgba;
 	}
 
-	public GridElement setRgba(double[] rgba) {
+	public Cell setRgba(double[] rgba) {
 		this.rgba = rgba;
 		return this;
 	}
@@ -48,7 +48,7 @@ public class GridElement implements IElement<Boolean> {
 
 	@Override
 	public String toString() {
-		return "GridElement{" +
+		return "Cell{" +
 			"value=" + value +
 			'}';
 	}

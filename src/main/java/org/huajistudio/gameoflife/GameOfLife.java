@@ -4,7 +4,7 @@ import org.huajistudio.gameoflife.file.GridReader;
 import org.huajistudio.gameoflife.gui.Editor;
 import org.huajistudio.gameoflife.gui.Welcome;
 import org.huajistudio.gameoflife.util.I18n;
-import org.huajistudio.gameoflife.util.grid.Grid;
+import org.huajistudio.gameoflife.components.grid.Grid;
 import javafx.application.Application;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

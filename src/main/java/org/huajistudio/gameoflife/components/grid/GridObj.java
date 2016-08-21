@@ -1,4 +1,6 @@
-package org.huajistudio.gameoflife.util.grid;
+package org.huajistudio.gameoflife.components.grid;
+
+import org.huajistudio.gameoflife.components.cell.Cell;
 
 import java.util.Arrays;
 
@@ -8,13 +10,13 @@ public class GridObj {
 
 	public static class GridPosElement {
 		private GridPos position;
-		private GridElement element;
+		private Cell element;
 
-		public GridElement getElement() {
+		public Cell getElement() {
 			return element;
 		}
 
-		public void setElement(GridElement element) {
+		public void setElement(Cell element) {
 			this.element = element;
 		}
 

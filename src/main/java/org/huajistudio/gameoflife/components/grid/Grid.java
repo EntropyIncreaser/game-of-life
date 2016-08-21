@@ -1,7 +1,8 @@
-package org.huajistudio.gameoflife.util.grid;
+package org.huajistudio.gameoflife.components.grid;
 
 import org.huajistudio.gameoflife.util.ElementNotFoundException;
 import javafx.scene.paint.Color;
+import org.huajistudio.gameoflife.components.cell.Cell;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,8 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class Grid implements Iterable<GridElement> {
-	private Map<GridPos, GridElement> matrix = new HashMap<>();
+public class Grid implements Iterable<Cell> {
+	private Map<GridPos, Cell> matrix = new HashMap<>();
 	private int width, height;
 
 	public Grid(int width, int height) {
@@ -22,7 +23,7 @@ public class Grid implements Iterable<GridElement> {
 	private void init() {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				matrix.put(new GridPos(i, j), new GridElement().setValue(false).setRgba(new double[]{Color.WHITE.getRed(),Color.WHITE.getGreen(),Color.WHITE.getBlue(),Color.WHITE.getOpacity()}));
+				matrix.put(new GridPos(i, j), new Cell().setValue(false).setRgba(new double[]{Color.WHITE.getRed(),Color.WHITE.getGreen(),Color.WHITE.getBlue(),Color.WHITE.getOpacity()}));
 			}
 		}
 	}
@@ -45,7 +46,7 @@ public class Grid implements Iterable<GridElement> {
 		return this;
 	}
 
-	public GridElement getElement(GridPos pos) {
+	public Cell getElement(GridPos pos) {
 		if (pos.getX() > width || pos.getX() < 0 || pos.getY() > height || pos.getY() < 0)
 			throw new ArrayIndexOutOfBoundsException("Position out of range");
 		else if (matrix.containsKey(pos))
@@ -54,7 +55,7 @@ public class Grid implements Iterable<GridElement> {
 			throw new ElementNotFoundException("Element not found in matrix");
 	}
 
-	public Grid setElement(GridPos pos, GridElement element) {
+	public Grid setElement(GridPos pos, Cell element) {
 		if (pos.getX() > width || pos.getX() < 0 || pos.getY() > height || pos.getY() < 0)
 			throw new ArrayIndexOutOfBoundsException("Position out of range");
 		else
@@ -70,7 +71,7 @@ public class Grid implements Iterable<GridElement> {
 		return this;
 	}
 
-	public Grid replaceElement(GridPos pos, GridElement x, GridElement y) {
+	public Grid replaceElement(GridPos pos, Cell x, Cell y) {
 		if (pos.getX() > width || pos.getX() < 0 || pos.getY() > height || pos.getY() < 0)
 			throw new ArrayIndexOutOfBoundsException("Position out of range");
 		else
@@ -89,10 +90,10 @@ public class Grid implements Iterable<GridElement> {
 
 	public void evolveInPlace(EnumGridCelluloidAutomation enumGridCelluloidAutomation) {
 		Map<GridPos, Integer> count = new HashMap<>();
-		Map<GridPos, GridElement> newGrid = new HashMap<>();
+		Map<GridPos, Cell> newGrid = new HashMap<>();
 		int offsetX, offsetY, x, y;
 
-		for (Entry<GridPos, GridElement> elementEntry :
+		for (Entry<GridPos, Cell> elementEntry :
 			matrix.entrySet()) {
 			if (elementEntry.getKey().getX() >= width ||
 			    elementEntry.getKey().getY() >= height ||
@@ -113,9 +114,7 @@ public class Grid implements Iterable<GridElement> {
 					x = (x + width) % width;
 					y = (y + height) % height;
 					if (count.containsKey(new GridPos(x, y))) {
-//						TODO WTF
-//						count.get(new GridPos(x, y))++;
-						count.put(new GridPos(x, y).up().right(), 1);
+						count.put(new GridPos(x, y), count.get(new GridPos(x, y)) + 1);
 					} else {
 						count.put(new GridPos(x, y), 1);
 					}
@@ -137,7 +136,7 @@ public class Grid implements Iterable<GridElement> {
 	}
 
 	@Override
-	public Iterator<GridElement> iterator() {
+	public Iterator<Cell> iterator() {
 		return matrix.values().iterator();
 	}
 
