@@ -1,4 +1,4 @@
 package org.huajistudio.gameoflife.event;
 
-public class CellDestroyedEvent {
+public class SimpleEvent extends Event {
 }

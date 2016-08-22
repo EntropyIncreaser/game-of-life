@@ -1,5 +1,6 @@
 package org.huajistudio.gameoflife;
 
+import org.huajistudio.gameoflife.event.EventManager;
 import org.huajistudio.gameoflife.file.GridReader;
 import org.huajistudio.gameoflife.gui.Editor;
 import org.huajistudio.gameoflife.gui.Welcome;
@@ -17,10 +18,13 @@ import java.util.Locale;
 public class GameOfLife extends Application {
 	public static final Logger LOGGER = LogManager.getLogger("GameOfLife");
 	public static Locale locale = Locale.getDefault();
+	public static final EventManager EVENT_MANAGER = new EventManager();
 
 	public static Welcome wel = new Welcome();
 
 	public static void main(String[] args) {
+		// Register default listeners
+		EVENT_MANAGER.registerListenerInPackage("org.huajistudio.gameoflife.event.listener");
 		launch(args);
 	}
 

@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface HasResult {
-
+@Target(ElementType.METHOD)
+/**
+ * Make this event cancelable.
+ */
+public @interface Cancelable {
 }
