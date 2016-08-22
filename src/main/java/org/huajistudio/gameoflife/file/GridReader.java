@@ -1,18 +1,23 @@
 package org.huajistudio.gameoflife.file;
 
 import com.google.gson.Gson;
-import org.huajistudio.gameoflife.GameOfLife;
 import org.apache.commons.io.FileUtils;
 import org.huajistudio.gameoflife.components.cell.Cell;
-import org.huajistudio.gameoflife.components.grid.*;
+import org.huajistudio.gameoflife.components.grid.Grid;
+import org.huajistudio.gameoflife.components.grid.GridManager;
+import org.huajistudio.gameoflife.components.grid.GridObj;
+import org.huajistudio.gameoflife.components.grid.GridPos;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
 
 /**
  * Reads Grids from the file.
@@ -35,7 +40,7 @@ public class GridReader {
 			GridManager.addGrid(grid);
 			return grid;
 		} catch (Exception e) {
-			GameOfLife.LOGGER.error(e);
+			LOGGER.error(e);
 		}
 		return null;
 	}
@@ -58,9 +63,13 @@ public class GridReader {
 			obj.setData(elementList.toArray(new GridObj.GridPosElement[0]));
 			obj.setWidth(grid.getWidth());
 			obj.setHeight(grid.getHeight());
-			gson.toJson(obj, new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
+			StringWriter jsonStrWriter = new StringWriter();
+			gson.toJson(obj, jsonStrWriter);
+			String json = jsonStrWriter.toString();
+			LOGGER.info("Saved json: " + json);
+			new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8).append(json).flush();
 		} catch (Exception e) {
-			GameOfLife.LOGGER.error(e);
+			LOGGER.error(e);
 		}
 	}
 }

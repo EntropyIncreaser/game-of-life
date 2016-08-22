@@ -9,6 +9,6 @@ import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
 public class CellEventListener implements IEventListener {
 	@SubscribeEvent
 	public void onCellCreated(CellEvent.CellCreatedEvent event) {
-		LOGGER.info("Cell has been created at " + event.getPosition());
+		LOGGER.debug("Cell has been created at " + event.getPosition());
 	}
 }

@@ -1,4 +1,4 @@
 package org.huajistudio.gameoflife.event;
 
-public class SimpleEvent extends Event {
+public class SimpleEvent implements IEvent {
 }

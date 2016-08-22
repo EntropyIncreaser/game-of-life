@@ -6,7 +6,7 @@ import org.huajistudio.gameoflife.components.grid.GridPos;
 /**
  * An abstract class which contains the event of cells.
  */
-public abstract class CellEvent extends Event {
+public abstract class CellEvent implements IEvent {
 	private Cell cell;
 	private GridPos position;
 

@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class EventManager {
-	private final Map<Class<? extends Event>, Collection<EventHandler>> bindings;
+	private final Map<Class<? extends IEvent>, Collection<EventHandler>> bindings;
 	private final Set<IEventListener> registeredListeners;
 	private boolean debug = false;
 
@@ -16,21 +16,21 @@ public class EventManager {
 		registeredListeners = new HashSet<>();
 	}
 
-	public List<EventHandler> getListenersForClass(Class<? extends Event> clazz) {
+	public List<EventHandler> getListenersForClass(Class<? extends IEvent> clazz) {
 		if (!bindings.containsKey(clazz))
 			return new ArrayList<>();
 		return new ArrayList<>(bindings.get(clazz));
 	}
 
-	public <T extends Event> T executeEvent(T event) {
+	public <T extends IEvent> T executeEvent(T event) {
 		Collection<EventHandler> handlers = this.bindings.get(event.getClass());
 		if (handlers == null) {
 			if (this.debug)
-				GameOfLife.LOGGER.debug("Event " + event.getClass().getSimpleName() + " has no handlers.");
+				GameOfLife.LOGGER.debug("IEvent " + event.getClass().getSimpleName() + " has no handlers.");
 			return event;
 		}
 		if (this.debug)
-			GameOfLife.LOGGER.debug("Event " + event.getClass().getSimpleName() + " has " + handlers.size() + " handlers.");
+			GameOfLife.LOGGER.debug("IEvent " + event.getClass().getSimpleName() + " has " + handlers.size() + " handlers.");
 		for (EventHandler handler : handlers) {
 			handler.invoke(event);
 		}
@@ -76,9 +76,9 @@ public class EventManager {
 				continue;
 			}
 
-			if (Event.class.isAssignableFrom(param)) {
+			if (IEvent.class.isAssignableFrom(param)) {
 				@SuppressWarnings("unchecked") // Java just doesn't understand that this actually is a safe cast because of the above if-statement
-					Class<? extends Event> realParam = (Class<? extends Event>) param;
+					Class<? extends IEvent> realParam = (Class<? extends IEvent>) param;
 
 				if (!this.bindings.containsKey(realParam)) {
 					this.bindings.put(realParam, new TreeSet<>());
@@ -100,7 +100,7 @@ public class EventManager {
 	}
 
 	public void removeListener(EventListener listener) {
-		for (Map.Entry<Class<? extends Event>, Collection<EventHandler>> ee : bindings.entrySet()) {
+		for (Map.Entry<Class<? extends IEvent>, Collection<EventHandler>> ee : bindings.entrySet()) {
 			Iterator<EventHandler> it = ee.getValue().iterator();
 			while (it.hasNext()) {
 				EventHandler curr = it.next();
@@ -110,8 +110,8 @@ public class EventManager {
 		}
 		this.registeredListeners.remove(listener);
 	}
-	public Map<Class<? extends Event>, Collection<EventHandler>> getBindings() {
-		return new HashMap<Class<? extends Event>, Collection<EventHandler>>(bindings);
+	public Map<Class<? extends IEvent>, Collection<EventHandler>> getBindings() {
+		return new HashMap<Class<? extends IEvent>, Collection<EventHandler>>(bindings);
 	}
 	public Set<IEventListener> getRegisteredListeners() {
 		return new HashSet<IEventListener>(registeredListeners);

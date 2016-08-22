@@ -32,7 +32,7 @@ public class EventHandler implements Comparable<EventHandler> {
 		return annotation.priority().getPriority();
 	}
 
-	public void invoke(Event event) {
+	public void invoke(IEvent event) {
 		try {
 			method.invoke(listener, event);
 		} catch (InvocationTargetException | IllegalAccessException e) {
