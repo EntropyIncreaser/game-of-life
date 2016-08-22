@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.huajistudio.gameoflife.event.EventManager;
 import org.huajistudio.gameoflife.gui.Editor;
+import org.huajistudio.gameoflife.gui.Options;
 import org.huajistudio.gameoflife.gui.Welcome;
 
 import java.util.Locale;
@@ -17,6 +18,7 @@ public class GameOfLife extends Application {
 
 	public static final Welcome WELCOME = new Welcome();
 	public static final Editor EDITOR = new Editor(10, 10);
+	public static final Options OPTIONS = new Options();
 
 	public static void main(String[] args) {
 		// Register default listeners

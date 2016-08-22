@@ -21,9 +21,10 @@ import java.util.regex.Pattern;
 
 import static org.huajistudio.gameoflife.GameOfLife.EDITOR;
 import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
+import static org.huajistudio.gameoflife.GameOfLife.OPTIONS;
 
 public class Welcome extends Application {
-	public JFXButton newLifeButton, openLifeButton;
+	public JFXButton newLifeButton, openLifeButton, optButton;
 	public JFXComboBox<Locale> comboBox;
 	public WelcomeController controller;
 
@@ -33,6 +34,7 @@ public class Welcome extends Application {
 		comboBox = controller.comboBox;
 		newLifeButton = controller.newLifeButton;
 		openLifeButton = controller.openLifeButton;
+		optButton = controller.optButton;
 
 		Reflections reflections = new Reflections("language", new ResourcesScanner());
 		Set<String> properties =
@@ -72,6 +74,14 @@ public class Welcome extends Application {
 				grid = GridReader.readGrid(file);
 				EDITOR.setWorldGrid(grid);
 				EDITOR.start(primaryStage);
+			} catch (Exception e) {
+				LOGGER.error(e);
+			}
+		});
+
+		optButton.setOnAction(event -> {
+			try {
+				OPTIONS.start(primaryStage);
 			} catch (Exception e) {
 				LOGGER.error(e);
 			}
