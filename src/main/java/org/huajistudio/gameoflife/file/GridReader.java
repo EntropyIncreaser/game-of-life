@@ -8,14 +8,13 @@ import org.huajistudio.gameoflife.components.grid.GridManager;
 import org.huajistudio.gameoflife.components.grid.GridObj;
 import org.huajistudio.gameoflife.components.grid.GridPos;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
 
@@ -31,6 +30,20 @@ public class GridReader {
      */
 	public static Grid readGrid(File file) {
 		Gson gson = new Gson();
+		if (file.toString().endsWith("gz")) {
+			try {
+				GridObj gridObj = gson.fromJson(new InputStreamReader(new GZIPInputStream(new FileInputStream(file)), StandardCharsets.UTF_8), GridObj.class);
+				Grid grid = new Grid(gridObj.getWidth(), gridObj.getHeight());
+				for (GridObj.GridPosElement element : gridObj.getData()) {
+					grid.setElement(element.getPosition(), element.getElement());
+				}
+				GridManager.addGrid(grid);
+				return grid;
+			} catch (Exception e) {
+				LOGGER.error(e);
+			}
+		}
+
 		try {
 			GridObj gridObj = gson.fromJson(FileUtils.readFileToString(file, Charset.forName("UTF-8")), GridObj.class);
 			Grid grid = new Grid(gridObj.getWidth(), gridObj.getHeight());
@@ -66,8 +79,15 @@ public class GridReader {
 			StringWriter jsonStrWriter = new StringWriter();
 			gson.toJson(obj, jsonStrWriter);
 			String json = jsonStrWriter.toString();
-			LOGGER.info("Saved json: " + json);
-			new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8).append(json).flush();
+			if (file.toString().endsWith("gz")) {
+				try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(new FileOutputStream(file))) {
+					gzipOutputStream.write(json.getBytes(StandardCharsets.UTF_8));
+					gzipOutputStream.flush();
+				} catch (Exception e) {
+					LOGGER.error(e);
+				}
+			} else
+				new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8).append(json).flush();
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}

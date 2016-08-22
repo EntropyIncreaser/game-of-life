@@ -1,10 +1,5 @@
 package org.huajistudio.gameoflife.gui;
 
-import org.huajistudio.gameoflife.file.GridReader;
-import org.huajistudio.gameoflife.gui.controller.EditorController;
-import org.huajistudio.gameoflife.util.I18n;
-import org.huajistudio.gameoflife.components.grid.Grid;
-import org.huajistudio.gameoflife.components.grid.GridPos;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,10 +8,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.huajistudio.gameoflife.GameOfLife;
+import org.huajistudio.gameoflife.components.grid.Grid;
+import org.huajistudio.gameoflife.components.grid.GridPos;
+import org.huajistudio.gameoflife.file.GridReader;
+import org.huajistudio.gameoflife.gui.controller.EditorController;
+import org.huajistudio.gameoflife.util.I18n;
 
 import java.io.File;
 import java.util.Objects;
+
+import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
 
 public class Editor extends Application {
 	private Grid worldGrid;
@@ -40,12 +41,14 @@ public class Editor extends Application {
 		playButton = controller.playButton;
 		saveButton = controller.saveButton;
 
+		drawGrid(worldCanvas, worldGrid, Color.BLACK);
+
 		playButton.setOnAction(event -> {
 			drawGrid(worldCanvas, worldGrid, Color.BLACK);
-			if (Objects.equals(playButton.getText(), "Start")) {
-				playButton.setText("Stop");
+			if (Objects.equals(playButton.getText(), I18n.parse("window.editor.button.start.label"))) {
+				playButton.setText(I18n.parse("window.editor.button.stop.label"));
 			} else {
-				playButton.setText("Start");
+				playButton.setText(I18n.parse("window.editor.button.start.label"));
 				// TODO: make the world evolve
 			}
 		});
@@ -54,19 +57,20 @@ public class Editor extends Application {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle(I18n.parse("window.jsonsaver.title"));
 			fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(I18n.parse("extension.json"), "*.json")
+				new FileChooser.ExtensionFilter(I18n.parse("extension.json"), "*.json"),
+				new FileChooser.ExtensionFilter(I18n.parse("extension.gz"), "*.json.gz")
 			);
 			fileChooser.setInitialFileName("grid.json");
 			File file = fileChooser.showSaveDialog(primaryStage);
 			try {
 				GridReader.saveGrid(file, worldGrid);
 			} catch (Exception e) {
-				GameOfLife.LOGGER.error(e);
+				LOGGER.error(e);
 			}
 		});
 
 		primaryStage.setScene(new Scene(controller));
-		primaryStage.setTitle("World Editor");
+		primaryStage.setTitle(I18n.parse("window.editor.title"));
 		primaryStage.show();
 	}
 

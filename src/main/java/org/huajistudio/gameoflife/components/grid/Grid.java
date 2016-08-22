@@ -1,6 +1,7 @@
 package org.huajistudio.gameoflife.components.grid;
 
 import org.huajistudio.gameoflife.event.CellEvent;
+import org.huajistudio.gameoflife.event.GridEvent;
 import org.huajistudio.gameoflife.util.ElementNotFoundException;
 import javafx.scene.paint.Color;
 import org.huajistudio.gameoflife.components.cell.Cell;
@@ -24,11 +25,12 @@ public class Grid implements Iterable<Cell> {
 	}
 
 	private void init() {
+		EVENT_MANAGER.executeEvent(new GridEvent.GridCreatedEvent(this));
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				Cell cell = new Cell().setValue(false).setRgba(new double[]{Color.WHITE.getRed(),Color.WHITE.getGreen(),Color.WHITE.getBlue(),Color.WHITE.getOpacity()});
 				matrix.put(new GridPos(i, j), cell);
-				EVENT_MANAGER.executeEvent(new CellEvent.CellCreatedEvent(cell, new GridPos(i, j)));
+				EVENT_MANAGER.executeEvent(new CellEvent.CellCreatedEvent(this, new GridPos(i, j), cell));
 			}
 		}
 	}
@@ -82,6 +84,10 @@ public class Grid implements Iterable<Cell> {
 		else
 			matrix.replace(pos, x, y);
 		return this;
+	}
+
+	public boolean hasElement(GridPos pos) {
+		return matrix.containsKey(pos);
 	}
 
 	public Grid purge() {

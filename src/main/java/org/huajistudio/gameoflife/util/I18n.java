@@ -12,12 +12,13 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 public class I18n {
+
 	public static String parse(String key) {
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("language/language", GameOfLife.locale, new UTF8Control());
 		return resourceBundle.getString(key);
 	}
 
-	private static class UTF8Control extends ResourceBundle.Control {
+	public static class UTF8Control extends ResourceBundle.Control {
 		public ResourceBundle newBundle
 			(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
 			throws IllegalAccessException, InstantiationException, IOException

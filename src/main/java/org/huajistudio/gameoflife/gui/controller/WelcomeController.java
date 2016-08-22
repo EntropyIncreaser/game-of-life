@@ -5,9 +5,12 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
+import org.huajistudio.gameoflife.GameOfLife;
+import org.huajistudio.gameoflife.util.I18n;
 
-import java.util.Locale;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class WelcomeController extends GridPane {
 	@FXML public JFXButton newLifeButton;
@@ -16,6 +19,7 @@ public class WelcomeController extends GridPane {
 
 	public WelcomeController() {
 		FXMLLoader loader = new FXMLLoader(WelcomeController.class.getResource("/fxml/Welcome.fxml"));
+		loader.setResources(ResourceBundle.getBundle("language/language", GameOfLife.locale, new I18n.UTF8Control()));
 		loader.setRoot(this);
 		loader.setController(this);
 

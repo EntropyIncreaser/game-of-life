@@ -13,12 +13,12 @@
 	        GridPane.rowSpan="1"  GridPane.columnSpan="2"/>
 
 	<JFXButton fx:id="playButton"
-	           text="Start"
+	           text="%window.editor.button.start.label"
 	           GridPane.rowIndex="0"
 	           GridPane.columnIndex="2"/>
 
 	<JFXButton fx:id="saveButton"
-	           text="Save"
+	           text="%window.editor.button.save.label"
 	           GridPane.rowIndex="1"
 	           GridPane.columnIndex="2"/>
 </fx:root>

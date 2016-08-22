@@ -1,18 +1,21 @@
 package org.huajistudio.gameoflife.event;
 
 import org.huajistudio.gameoflife.components.cell.Cell;
+import org.huajistudio.gameoflife.components.grid.Grid;
 import org.huajistudio.gameoflife.components.grid.GridPos;
 
 /**
  * An abstract class which contains the event of cells.
  */
 public abstract class CellEvent implements IEvent {
+	private Grid grid;
 	private Cell cell;
 	private GridPos position;
 
-	public CellEvent(Cell cell, GridPos position) {
-		this.cell = cell;
+	public CellEvent(Grid grid, GridPos position, Cell cell) {
+		this.grid = grid;
 		this.position = position;
+		this.cell = cell;
 	}
 
 	public Cell getCell() {
@@ -33,12 +36,21 @@ public abstract class CellEvent implements IEvent {
 		return this;
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public CellEvent setGrid(Grid grid) {
+		this.grid = grid;
+		return this;
+	}
+
 	/**
 	 * Perform when a cell has been created.
 	 */
 	public static class CellCreatedEvent extends CellEvent {
-		public CellCreatedEvent(Cell cell, GridPos position) {
-			super(cell, position);
+		public CellCreatedEvent(Grid grid, GridPos position, Cell cell) {
+			super(grid, position, cell);
 		}
 	}
 
@@ -46,8 +58,8 @@ public abstract class CellEvent implements IEvent {
 	 * Perform when a cell has been killed.
 	 */
 	public static class CellKilledEvent extends CellEvent {
-		public CellKilledEvent(Cell cell, GridPos position) {
-			super(cell, position);
+		public CellKilledEvent(Grid grid, GridPos position, Cell cell) {
+			super(grid, position, cell);
 		}
 	}
 }
