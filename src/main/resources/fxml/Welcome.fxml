@@ -12,31 +12,35 @@
 
 <fx:root alignment="CENTER" hgap="10" type="javafx.scene.layout.GridPane" vgap="10" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
 	<Text style="-fx-font-size: 25" text="%window.welcome.maintext" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-	<HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
-		<JFXButton fx:id="newLifeButton" buttonType="RAISED" styleClass="button-raised" text="%window.welcome.button.create.label" />
+	<HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
+		<JFXButton fx:id="newLifeButton"
+		           buttonType="RAISED"
+		           prefWidth="100"
+		           style="-fx-background-color:#5264AE; -fx-text-fill: white"
+		           text="%window.welcome.button.create.label" />
 	</HBox>
 
-	<HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0">
-	<JFXButton fx:id="openLifeButton" buttonType="RAISED" styleClass="button-raised" text="%window.welcome.button.open.label" />
+	<HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="2">
+		<JFXButton fx:id="openLifeButton"
+		           buttonType="RAISED"
+		           prefWidth="100"
+		           style="-fx-background-color:#5264AE; -fx-text-fill: white"
+		           text="%window.welcome.button.open.label" />
 	</HBox>
-	<JFXComboBox fx:id="comboBox" promptText="(Default)" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-	<Label text="%window.welcome.combobox.language.label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-   <HBox prefHeight="0.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-      <children>
-         <JFXButton fx:id="optButton" buttonType="RAISED" prefHeight="23.0" prefWidth="235.0" text="%window.welcome.button.opt.label" />
-      </children>
-   </HBox>
+	<HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
+		<JFXButton fx:id="optButton"
+	               buttonType="RAISED"
+	               prefWidth="100"
+	               style="-fx-background-color:#5264AE; -fx-text-fill: white"
+	               text="%window.welcome.button.opt.label" />
+	</HBox>
 	<padding>
 		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 	</padding>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+	<HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="4">
+		<Label text="%window.welcome.combobox.language.label"/>
+	</HBox>
+	<HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="5">
+		<JFXComboBox fx:id="comboBox" promptText="(Default)"/>
+	</HBox>
 </fx:root>
