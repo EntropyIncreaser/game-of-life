@@ -15,21 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.event;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+public enum EnumEventPriority {
+	LOWEST(0),
+	LOW(25),
+	NORMAL(50),
+	HIGH(75),
+	HIGHEST(100);
 
-import java.util.ArrayList;
-import java.util.List;
+	private int priority;
 
-/**
- * Manage the grids.
- * @author Lasm_Gratel
- */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
+	EnumEventPriority(int priority) {
+		this.priority = priority;
+	}
 
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
+	public int getPriority() {
+		return priority;
 	}
 }

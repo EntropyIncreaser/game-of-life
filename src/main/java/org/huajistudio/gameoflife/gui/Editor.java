@@ -1,3 +1,20 @@
+/*
+ * A game inspired from Conway's Game Of Life.
+ * Copyright (C) 2016 Huaji Studio.
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.huajistudio.gameoflife.gui;
 
 import com.jfoenix.controls.JFXButton;
@@ -8,17 +25,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.huajistudio.gameoflife.api.GameOfLifeAPI;
+import org.huajistudio.gameoflife.api.components.grid.Grid;
+import org.huajistudio.gameoflife.api.components.grid.GridPos;
 import org.huajistudio.gameoflife.components.automaton.AutomatonThread;
-import org.huajistudio.gameoflife.components.grid.Grid;
-import org.huajistudio.gameoflife.components.grid.GridPos;
 import org.huajistudio.gameoflife.file.GridReader;
 import org.huajistudio.gameoflife.gui.controller.EditorController;
-import org.huajistudio.gameoflife.util.I18n;
 
 import java.io.File;
 import java.util.Objects;
 
-import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
+import static org.huajistudio.gameoflife.api.GameOfLifeAPI.LOGGER;
 
 public class Editor extends Application {
 	private Grid worldGrid;
@@ -53,13 +70,13 @@ public class Editor extends Application {
 
 		playButton.setOnAction(event -> {
 			drawGrid(worldCanvas, worldGrid, Color.BLACK);
-			if (Objects.equals(playButton.getText(), I18n.parse("window.editor.button.start.label"))) {
-				playButton.setText(I18n.parse("window.editor.button.stop.label"));
+			if (Objects.equals(playButton.getText(), GameOfLifeAPI.I18N.parse("window.editor.button.start.label"))) {
+				playButton.setText(GameOfLifeAPI.I18N.parse("window.editor.button.stop.label"));
 				thread.resume();
 				new Thread(thread).start();
 				LOGGER.info("Automaton Thread Started");
 			} else {
-				playButton.setText(I18n.parse("window.editor.button.start.label"));
+				playButton.setText(GameOfLifeAPI.I18N.parse("window.editor.button.start.label"));
 				thread.stop();
 				LOGGER.info("Automaton Thread Stopped");
 			}
@@ -67,10 +84,10 @@ public class Editor extends Application {
 
 		saveButton.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle(I18n.parse("window.jsonsaver.title"));
+			fileChooser.setTitle(GameOfLifeAPI.I18N.parse("window.jsonsaver.title"));
 			fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(I18n.parse("extension.json"), "*.json"),
-				new FileChooser.ExtensionFilter(I18n.parse("extension.gz"), "*.json.gz")
+				new FileChooser.ExtensionFilter(GameOfLifeAPI.I18N.parse("extension.json"), "*.json"),
+				new FileChooser.ExtensionFilter(GameOfLifeAPI.I18N.parse("extension.gz"), "*.json.gz")
 			);
 			fileChooser.setInitialFileName("grid.json");
 			File file = fileChooser.showSaveDialog(primaryStage);
@@ -84,7 +101,7 @@ public class Editor extends Application {
 
 
 		primaryStage.setScene(new Scene(controller));
-		primaryStage.setTitle(I18n.parse("window.editor.title"));
+		primaryStage.setTitle(GameOfLifeAPI.I18N.parse("window.editor.title"));
 		primaryStage.show();
 	}
 

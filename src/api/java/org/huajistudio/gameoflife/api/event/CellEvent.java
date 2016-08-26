@@ -1,0 +1,82 @@
+/*
+ * A game inspired from Conway's Game Of Life.
+ * Copyright (C) 2016 Huaji Studio.
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.huajistudio.gameoflife.api.event;
+
+import org.huajistudio.gameoflife.api.components.cell.Cell;
+import org.huajistudio.gameoflife.api.components.grid.Grid;
+import org.huajistudio.gameoflife.api.components.grid.GridPos;
+
+/**
+ * An abstract class which contains the event of cells.
+ */
+public abstract class CellEvent implements IEvent {
+	private Grid grid;
+	private Cell cell;
+	private GridPos position;
+
+	public CellEvent(Grid grid, GridPos position, Cell cell) {
+		this.grid = grid;
+		this.position = position;
+		this.cell = cell;
+	}
+
+	public Cell getCell() {
+		return cell;
+	}
+
+	public CellEvent setCell(Cell cell) {
+		this.cell = cell;
+		return this;
+	}
+
+	public GridPos getPosition() {
+		return position;
+	}
+
+	public CellEvent setPosition(GridPos position) {
+		this.position = position;
+		return this;
+	}
+
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public CellEvent setGrid(Grid grid) {
+		this.grid = grid;
+		return this;
+	}
+
+	/**
+	 * Perform when a cell has been created.
+	 */
+	public static class CellCreatedEvent extends CellEvent {
+		public CellCreatedEvent(Grid grid, GridPos position, Cell cell) {
+			super(grid, position, cell);
+		}
+	}
+
+	/**
+	 * Perform when a cell has been killed.
+	 */
+	public static class CellKilledEvent extends CellEvent {
+		public CellKilledEvent(Grid grid, GridPos position, Cell cell) {
+			super(grid, position, cell);
+		}
+	}
+}

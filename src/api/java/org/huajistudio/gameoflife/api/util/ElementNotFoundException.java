@@ -15,21 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.util;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+public class ElementNotFoundException extends RuntimeException {
+	public ElementNotFoundException() {
+	}
 
-import java.util.ArrayList;
-import java.util.List;
+	public ElementNotFoundException(Throwable cause) {
+		super(cause);
+	}
 
-/**
- * Manage the grids.
- * @author Lasm_Gratel
- */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
+	public ElementNotFoundException(String message) {
+		super(message);
+	}
 
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
+	public ElementNotFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public ElementNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

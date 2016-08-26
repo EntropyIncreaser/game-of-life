@@ -1,12 +1,29 @@
+/*
+ * A game inspired from Conway's Game Of Life.
+ * Copyright (C) 2016 Huaji Studio.
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.huajistudio.gameoflife.event.listener;
 
 import javafx.scene.paint.Color;
-import org.huajistudio.gameoflife.components.cell.Cell;
-import org.huajistudio.gameoflife.event.CellEvent;
-import org.huajistudio.gameoflife.event.IEventListener;
-import org.huajistudio.gameoflife.event.SubscribeEvent;
+import org.huajistudio.gameoflife.api.components.cell.Cell;
+import org.huajistudio.gameoflife.api.event.CellEvent;
+import org.huajistudio.gameoflife.api.event.IEventListener;
+import org.huajistudio.gameoflife.api.event.SubscribeEvent;
 
-import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
+import static org.huajistudio.gameoflife.api.GameOfLifeAPI.LOGGER;
 
 public class CellEventListener implements IEventListener {
 	@SubscribeEvent

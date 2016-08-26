@@ -15,21 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.util;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+import org.huajistudio.gameoflife.GameOfLife;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ResourceBundle;
 
 /**
- * Manage the grids.
- * @author Lasm_Gratel
+ * Default implementation of internalization support.
+ * @see org.huajistudio.gameoflife.api.util.II18n
  */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
+public class I18n implements II18n {
+	public String parse(String key) {
+		// Simple but useful
+		return ResourceBundle.getBundle("language/language", GameOfLife.locale, new II18n.UTF8Control()).getString(key);
 	}
 }

@@ -15,21 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.event;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+public class JFXWindowEvent implements IEvent {
+	private Stage stage;
 
-/**
- * Manage the grids.
- * @author Lasm_Gratel
- */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
+	public JFXWindowEvent(Stage stage) {
+		this.stage = stage;
+	}
 
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
+	public Stage getPane() {
+		return stage;
+	}
+
+	public JFXWindowEvent setPane(Stage stage) {
+		this.stage = stage;
+		return this;
+	}
+
+	/**
+	 * Performed when the window is opened.
+	 */
+	public static class OpenEvent extends JFXWindowEvent {
+		public OpenEvent(Stage stage) {
+			super(stage);
+		}
+	}
+
+	/**
+	 * Performed when the window is closed.
+	 */
+	public static class CloseEvent extends JFXWindowEvent {
+		public CloseEvent(Stage stage) {
+			super(stage);
+		}
 	}
 }

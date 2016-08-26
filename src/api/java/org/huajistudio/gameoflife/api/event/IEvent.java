@@ -15,21 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
-
-import org.huajistudio.gameoflife.api.components.grid.Grid;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.huajistudio.gameoflife.api.event;
 
 /**
- * Manage the grids.
- * @author Lasm_Gratel
+ * IEvent class for all event implementation.
  */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
-	}
+public interface IEvent {
 }

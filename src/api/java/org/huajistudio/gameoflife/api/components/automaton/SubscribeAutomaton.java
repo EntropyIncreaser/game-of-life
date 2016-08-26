@@ -15,21 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.components.automaton;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+import org.huajistudio.gameoflife.api.event.EnumEventPriority;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 /**
- * Manage the grids.
- * @author Lasm_Gratel
+ * Set this annotation on a method will make the method execute when it cycles.
  */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
-	}
+public @interface SubscribeAutomaton {
+	EnumEventPriority priority() default EnumEventPriority.NORMAL;
 }

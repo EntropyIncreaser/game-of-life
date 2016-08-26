@@ -15,21 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.event;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 /**
- * Manage the grids.
- * @author Lasm_Gratel
+ * Set this annotation on a method will make the method listen a selected event.
  */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
-	}
+public @interface SubscribeEvent {
+	EnumEventPriority priority() default EnumEventPriority.NORMAL;
+	boolean receiveCanceled() default false;
 }

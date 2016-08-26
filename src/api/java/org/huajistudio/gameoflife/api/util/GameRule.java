@@ -15,21 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
+package org.huajistudio.gameoflife.api.util;
 
-import org.huajistudio.gameoflife.api.components.grid.Grid;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Manage the grids.
- * @author Lasm_Gratel
- */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
-	}
+public class GameRule {
+	public static int reproductionAmount = 1;
+	public static int underPopulationAmount = 2;
+	public static int overPopulationAmount = 3;
+	/**
+	 * Cycle time (in milliseconds)
+	 */
+	public static int cycleTime = 300;
 }

@@ -15,21 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.grid;
-
-import org.huajistudio.gameoflife.api.components.grid.Grid;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.huajistudio.gameoflife.api.components.automaton;
 
 /**
- * Manage the grids.
- * @author Lasm_Gratel
+ * The automaton thread.
+ * Some tips for the developer who want to implement it in your plugin:
+ * You should have executable stop/pause/resume method, so it can work perfect.
  */
-public class GridManager {
-	private static List<Grid> gridList = new ArrayList<>();
-
-	public static void addGrid(Grid grid) {
-		gridList.add(grid);
-	}
+public interface IAutomatonThread extends Runnable {
+	void stop();
+	void pause();
+	void resume();
 }
