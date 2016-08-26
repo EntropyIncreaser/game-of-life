@@ -15,9 +15,10 @@ public class AutomaticPopulationSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
 	public void underPopulation(Grid grid) {
 		for (GridPos pos : grid.keySet()) {
-			LOGGER.info("Under Population Detecting %d", GridHelper.getNearbyCellAmount(grid, pos));
-			if (GridHelper.getNearbyCellAmount(grid, pos) < underPopulationAmount && grid.getElement(pos).getValue())
+			if (GridHelper.getNearbyCellAmount(grid, pos) < underPopulationAmount && grid.getElement(pos).getValue()) {
+				LOGGER.info("Under Population Detected " + pos + ", Nearby:" + GridHelper.getNearbyCellAmount(grid, pos));
 				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
+			}
 		}
 	}
 

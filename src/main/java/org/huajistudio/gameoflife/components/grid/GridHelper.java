@@ -1,5 +1,11 @@
 package org.huajistudio.gameoflife.components.grid;
 
+import com.google.common.collect.Lists;
+import org.huajistudio.gameoflife.GameOfLife;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Useful functions for a Grid.
  * @author Lasm_Gratel
@@ -12,8 +18,7 @@ public class GridHelper {
      * @return the amount
      */
 	public static int getNearbyCellAmount(Grid grid, GridPos pos) {
-		GridPos[] poses = {
-			pos.left().up(),
+		List<GridPos> poses = Lists.newArrayList(pos.left().up(),
 			pos.left(),
 			pos.left().down(),
 			pos.down(),
@@ -21,12 +26,13 @@ public class GridHelper {
 			pos.right(),
 			pos.right().up(),
 			pos.up()
-		};
+		);
+
+		GameOfLife.LOGGER.info(Arrays.toString(poses.toArray()));
 
 		int i = 0;
-
 		for (GridPos pos1 : poses) {
-			if (grid.hasElement(pos1) && grid.getElement(pos1).getValue())
+			if (grid.getElement(pos1).getValue())
 				i++;
 		}
 

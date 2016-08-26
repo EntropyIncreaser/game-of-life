@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.huajistudio.gameoflife.components.automaton.AutomatonThread;
 import org.huajistudio.gameoflife.components.grid.Grid;
 import org.huajistudio.gameoflife.components.grid.GridPos;
 import org.huajistudio.gameoflife.file.GridReader;
@@ -21,6 +22,7 @@ import static org.huajistudio.gameoflife.GameOfLife.LOGGER;
 
 public class Editor extends Application {
 	private Grid worldGrid;
+	private AutomatonThread thread;
 
 	public EditorController controller;
 	public Canvas worldCanvas;
@@ -35,7 +37,13 @@ public class Editor extends Application {
 	}
 
 	@Override
+	public void stop() throws Exception {
+		thread.stop();
+	}
+
+	@Override
 	public void start(Stage primaryStage) throws Exception {
+		thread = new AutomatonThread(worldGrid);
 		controller = new EditorController();
 		worldCanvas = controller.worldCanvas;
 		playButton = controller.playButton;
@@ -47,9 +55,13 @@ public class Editor extends Application {
 			drawGrid(worldCanvas, worldGrid, Color.BLACK);
 			if (Objects.equals(playButton.getText(), I18n.parse("window.editor.button.start.label"))) {
 				playButton.setText(I18n.parse("window.editor.button.stop.label"));
+				thread.resume();
+				new Thread(thread).start();
+				LOGGER.info("Automaton Thread Started");
 			} else {
 				playButton.setText(I18n.parse("window.editor.button.start.label"));
-				// TODO: make the world evolve
+				thread.stop();
+				LOGGER.info("Automaton Thread Stopped");
 			}
 		});
 
@@ -68,6 +80,8 @@ public class Editor extends Application {
 				LOGGER.error(e);
 			}
 		});
+
+
 
 		primaryStage.setScene(new Scene(controller));
 		primaryStage.setTitle(I18n.parse("window.editor.title"));

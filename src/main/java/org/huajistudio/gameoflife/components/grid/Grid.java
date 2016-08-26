@@ -6,16 +6,14 @@ import org.huajistudio.gameoflife.util.ElementNotFoundException;
 import javafx.scene.paint.Color;
 import org.huajistudio.gameoflife.components.cell.Cell;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.huajistudio.gameoflife.GameOfLife.EVENT_MANAGER;
 
 public class Grid implements Iterable<Cell> {
-	private Map<GridPos, Cell> matrix = new HashMap<>();
+	private Map<GridPos, Cell> matrix = new ConcurrentHashMap<GridPos, Cell>();
 	private int width, height;
 
 	public Grid(int width, int height) {

@@ -14,17 +14,14 @@ public class AutomaticComponentManager {
 
 	public void addAutomaticComponent(Class<? extends IAutomaticComponent> component) {
 		LOGGER.info("Adding component " + component.getSimpleName());
-		Method[] methods = component.getClass().getMethods();
+		Method[] methods = component.getDeclaredMethods();
 		for (final Method method : methods) {
 			SubscribeAutomaton annotation = method.getAnnotation(SubscribeAutomaton.class);
 			if (annotation == null)
 				continue;
 			if (!method.getParameterTypes()[0].equals(Grid.class))
 				continue;
-
-			Class<Grid> param = Grid.class;
-
-			LOGGER.debug("Add listener method: " + method.getName());
+			LOGGER.info("Add listener method: " + method.getName());
 			try {
 				componentHandlers.add(new AutomaticComponentHandler(annotation, component.newInstance(), method));
 			} catch (InstantiationException | IllegalAccessException e) {

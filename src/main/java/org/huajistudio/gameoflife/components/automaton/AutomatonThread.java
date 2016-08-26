@@ -55,6 +55,7 @@ public class AutomatonThread implements Runnable {
 	public void resume() {
 		synchronized (pauseLock) {
 			paused = false;
+			running = true;
 			pauseLock.notifyAll();
 		}
 	}
