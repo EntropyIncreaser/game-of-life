@@ -31,8 +31,9 @@ public class OptionsController extends BorderPane {
 	@FXML public JFXTextField textFieldWidth;
 
 	public OptionsController() {
-		FXMLLoader loader = new FXMLLoader(WelcomeController.class.getResource("/fxml/Options.fxml"));
+		FXMLLoader loader = new FXMLLoader(OptionsController.class.getResource("/fxml/Options.fxml"));
 		loader.setResources(ResourceBundle.getBundle("language/language", GameOfLife.locale, new I18n.UTF8Control()));
+		loader.setRoot(this);
 		loader.setController(this);
 
 		try {
