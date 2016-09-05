@@ -17,15 +17,15 @@
  */
 package org.huajistudio.gameoflife.api.components.grid;
 
-import org.huajistudio.gameoflife.components.grid.EnumGridCelluloidAutomation;
+import javafx.scene.paint.Color;
+import org.huajistudio.gameoflife.api.components.cell.Cell;
 import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.api.event.GridEvent;
 import org.huajistudio.gameoflife.api.util.ElementNotFoundException;
-import javafx.scene.paint.Color;
-import org.huajistudio.gameoflife.api.components.cell.Cell;
 
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.huajistudio.gameoflife.api.GameOfLifeAPI.EVENT_MANAGER;
@@ -113,53 +113,6 @@ public class Grid implements Iterable<Cell> {
 
 	public Set<GridPos> keySet() {
 		return matrix.keySet();
-	}
-
-	public void evolveInPlace(EnumGridCelluloidAutomation enumGridCelluloidAutomation) {
-		Map<GridPos, Integer> count = new HashMap<>();
-		Map<GridPos, Cell> newGrid = new HashMap<>();
-		int offsetX, offsetY, x, y;
-
-		for (Entry<GridPos, Cell> elementEntry :
-			matrix.entrySet()) {
-			if (elementEntry.getKey().getX() >= width ||
-			    elementEntry.getKey().getY() >= height ||
-			   !elementEntry.getValue().getValue()) {
-				continue;
-			}
-			for (offsetX = -1; offsetX <= 1; offsetX++) {
-				for (offsetY = -1; offsetY <= 1; offsetY++) {
-					if (offsetX == 0 && offsetY == 0) {
-						continue;
-					}
-					x = elementEntry.getKey().getX() + offsetX;
-					y = elementEntry.getKey().getY() + offsetY;
-					if (!enumGridCelluloidAutomation.getSpaceType() &&
-					    x >= 0 && x < width && y >= 0 && y < height) {
-						continue;
-					}
-					x = (x + width) % width;
-					y = (y + height) % height;
-					if (count.containsKey(new GridPos(x, y))) {
-						count.put(new GridPos(x, y), count.get(new GridPos(x, y)) + 1);
-					} else {
-						count.put(new GridPos(x, y), 1);
-					}
-				}
-			}
-		}
-		matrix.clear();
-		init();
-		for (Entry<GridPos, Integer> countEntry :
-			count.entrySet()) {
-//			TODO WTF
-//			if (enumGridCelluloidAutomation.couldStay(countEntry.getValue()) &&
-//			    matrix.get(countEntry.getKey()) ||
-//				enumGridCelluloidAutomation.couldBorn(countEntry.getValue()) &&
-//				matrix.get(countEntry.getKey())) {
-//				matrix.put(countEntry.getKey(), true);
-//			}
-		}
 	}
 
 	@Override
