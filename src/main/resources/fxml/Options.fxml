@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<fx:root type="javafx.scene.layout.BorderPane" prefWidth="619.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
 	   <JFXTabPane BorderPane.alignment="CENTER">
 		   <Tab text="%window.options.tab1.text">
