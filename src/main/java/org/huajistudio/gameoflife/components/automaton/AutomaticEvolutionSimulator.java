@@ -20,11 +20,9 @@ package org.huajistudio.gameoflife.components.automaton;
 import org.huajistudio.gameoflife.api.components.automaton.IAutomaticComponent;
 import org.huajistudio.gameoflife.api.components.automaton.SubscribeAutomaton;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
-import org.huajistudio.gameoflife.components.grid.EnumGridSimpleRule;
-import org.huajistudio.gameoflife.components.grid.GridMultipleRule;
 
 public class AutomaticEvolutionSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
-	public void evolve(Grid grid, EnumGridSimpleRule simpleRule, GridMultipleRule multipleRule) {
+	public void evolve(Grid grid) {
 	}
 }
