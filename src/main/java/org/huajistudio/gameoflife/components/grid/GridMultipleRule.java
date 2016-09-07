@@ -22,4 +22,26 @@ package org.huajistudio.gameoflife.components.grid;
  * @author Entropy_Increaser
  */
 public class GridMultipleRule {
+	private boolean canInvade, comparingPopulation;
+
+	/**
+	 * @param canInvade If true, the old block's
+	 *                  color could be changed
+	 *                  directly.
+	 * @param comparingPopulation about the
+	 *                            invading or
+	 *                            others' judgement
+	 */
+	public GridMultipleRule(boolean canInvade, boolean comparingPopulation) {
+		this.canInvade = canInvade;
+		this.comparingPopulation = comparingPopulation;
+	}
+
+	public boolean getCanInvade() {
+		return canInvade;
+	}
+
+	public boolean getComparingPopulation() {
+		return comparingPopulation;
+	}
 }
