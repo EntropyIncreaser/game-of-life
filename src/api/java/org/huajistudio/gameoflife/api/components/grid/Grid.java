@@ -22,9 +22,9 @@ import org.huajistudio.gameoflife.api.components.cell.Cell;
 import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.api.event.GridEvent;
 import org.huajistudio.gameoflife.api.util.ElementNotFoundException;
-import org.huajistudio.gameoflife.components.grid.EnumGridCelluloidAutomation;
 
 import java.util.Iterator;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Set;
 
