@@ -20,32 +20,32 @@ package org.huajistudio.gameoflife.components.grid;
 import java.util.Arrays;
 
 /**
- * The enumeration of cellular automaton in the grid.
+ * The enumeration of the rule for a simple civilization in the grid.
  * @author Entropy_Increaser
  */
-public enum EnumGridCelluloidAutomation {
+public enum EnumGridSimpleRule {
 	/**
 	 * The default settings of the cellular automaton.
 	 */
 	DEFAULT(new int[]{ 3 }, new int[]{ 2, 3 }),
-	HIGHLIFE(new int[]{ 3, 6 }, new int[]{ 2, 3 }),
+	HIGH_LIFE(new int[]{ 3, 6 }, new int[]{ 2, 3 }),
 	SEED(new int[]{ 2 }, new int[]{}),
-	LIFEWITHOUTDEATH(new int[]{ 3 }, new int[]{ 0, 1, 2, 3, 4, 5, 6, 7, 8 }),
-	THREEFOUR(new int[]{ 3, 4 }, new int[]{ 3, 4 }),
+	LIFE_WITHOUT_DEATH(new int[]{ 3 }, new int[]{ 0, 1, 2, 3, 4, 5, 6, 7, 8 }),
+	THREE_FOUR(new int[]{ 3, 4 }, new int[]{ 3, 4 }),
 	DIAMOEBA(new int[]{ 3, 5, 6, 7, 8 }, new int[]{ 5, 6, 7, 8 }),
-	TWOXTWO(new int[]{ 3, 6 }, new int[]{ 1, 2, 5 }),
-	DAYANDNIGHT(new int[]{ 3, 6, 7, 8 }, new int[]{ 3, 4, 6, 7, 8 }),
+	TWO_X_TWO(new int[]{ 3, 6 }, new int[]{ 1, 2, 5 }),
+	DAY_AND_NIGHT(new int[]{ 3, 6, 7, 8 }, new int[]{ 3, 4, 6, 7, 8 }),
 	MORLEY(new int[]{ 3, 6, 8 }, new int[]{ 2, 4, 5 }),
 	ANNEAL(new int[]{ 4, 6, 7, 8 }, new int[]{ 3, 5, 6, 7, 8 });
 
 	private boolean born[], stay[];
 	private boolean isOpenSpace;
 
-	EnumGridCelluloidAutomation(int born[], int stay[]) {
+	EnumGridSimpleRule(int born[], int stay[]) {
 		this(born, stay, true);
 	}
 
-	EnumGridCelluloidAutomation(int born[], int stay[], boolean isOpenSpace) {
+	EnumGridSimpleRule(int born[], int stay[], boolean isOpenSpace) {
 		this.born = new boolean[9];
 		this.stay = new boolean[9];
 

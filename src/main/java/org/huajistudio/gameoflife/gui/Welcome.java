@@ -85,6 +85,9 @@ public class Welcome extends Application {
 			);
 			fileChooser.setInitialFileName("grid.json");
 			File file = fileChooser.showOpenDialog(primaryStage);
+			if (file == null) {
+				return;
+			}
 			primaryStage.hide();
 			Grid grid;
 			try {

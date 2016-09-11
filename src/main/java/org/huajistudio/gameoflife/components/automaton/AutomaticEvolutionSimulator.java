@@ -15,16 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.gui.controller;
+package org.huajistudio.gameoflife.components.automaton;
 
-import com.jfoenix.controls.JFXTextField;
-import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
-import org.huajistudio.gameoflife.api.gui.controller.IGuiController;
+import org.huajistudio.gameoflife.api.components.automaton.IAutomaticComponent;
+import org.huajistudio.gameoflife.api.components.automaton.SubscribeAutomaton;
+import org.huajistudio.gameoflife.api.components.grid.Grid;
 
-public class OptionsController extends BorderPane implements IGuiController {
-	@FXML public JFXTextField textFieldWidth;
-
-	public OptionsController() {
-		load();	}
+public class AutomaticEvolutionSimulator implements IAutomaticComponent {
+	@SubscribeAutomaton
+	public void evolve(Grid grid) {
+	}
 }
