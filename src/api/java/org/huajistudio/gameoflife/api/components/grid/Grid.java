@@ -17,21 +17,20 @@
  */
 package org.huajistudio.gameoflife.api.components.grid;
 
-import org.huajistudio.gameoflife.components.grid.EnumGridCelluloidAutomation;
+import javafx.scene.paint.Color;
+import org.huajistudio.gameoflife.api.components.cell.Cell;
 import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.api.event.GridEvent;
 import org.huajistudio.gameoflife.api.util.ElementNotFoundException;
-import javafx.scene.paint.Color;
-import org.huajistudio.gameoflife.api.components.cell.Cell;
+import org.huajistudio.gameoflife.components.grid.EnumGridCelluloidAutomation;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static org.huajistudio.gameoflife.api.GameOfLifeAPI.EVENT_MANAGER;
 
 public class Grid implements Iterable<Cell> {
-	private Map<GridPos, Cell> matrix = new ConcurrentHashMap<GridPos, Cell>();
+	private Map<GridPos, Cell> matrix = new TreeMap<>();
 	private int width, height;
 
 	public Grid(int width, int height) {

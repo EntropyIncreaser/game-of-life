@@ -21,7 +21,7 @@ package org.huajistudio.gameoflife.api.components.grid;
  * A position in a Grid.
  * @author Lasm_Gratel
  */
-public class GridPos {
+public class GridPos implements Comparable<GridPos> {
 	private int x, y;
 
 	public GridPos() {
@@ -112,5 +112,19 @@ public class GridPos {
 			"x=" + x +
 			", y=" + y +
 			'}';
+	}
+
+	@Override
+	public int compareTo(GridPos o) {
+		switch(Integer.compare(x, o.x)) {
+			case -1:
+				return -1;
+			case 0:
+				return Integer.compare(y, o.y);
+			case 1:
+				return 1;
+			default:
+				return 0;
+		}
 	}
 }

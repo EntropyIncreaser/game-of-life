@@ -54,42 +54,8 @@ public class EventManager {
 		return event;
 	}
 
-	public void registerListenerInPackage(String /*
- * A game inspired from Conway's Game Of Life.
- * Copyright (C) 2016 Huaji Studio.
- * <p>
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * <p>
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * <p>
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-packageName) {
-		Reflections reflections = new Reflections(/*
- * A game inspired from Conway's Game Of Life.
- * Copyright (C) 2016 Huaji Studio.
- * <p>
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * <p>
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * <p>
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-packageName);
+	public void registerListenerInPackage(String packageName) {
+		Reflections reflections = new Reflections(packageName);
 		Set<Class<? extends IEventListener>> listeners = reflections.getSubTypesOf(IEventListener.class);
 		for (Class<? extends IEventListener> listener : listeners) {
 			try {

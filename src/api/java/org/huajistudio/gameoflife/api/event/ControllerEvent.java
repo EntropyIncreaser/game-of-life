@@ -15,21 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.gui.controller;
+package org.huajistudio.gameoflife.api.event;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
 import org.huajistudio.gameoflife.api.gui.controller.IGuiController;
 
-import java.util.Locale;
+public abstract class ControllerEvent implements IEvent {
+	private IGuiController controller;
 
-public class WelcomeController extends GridPane implements IGuiController {
-	@FXML private JFXButton newLifeButton, openLifeButton, optButton;
-	@FXML public JFXComboBox<Locale> comboBox;
+	public ControllerEvent(IGuiController controller) {
+		this.controller = controller;
+	}
 
-	public WelcomeController() {
-		load();
+	public IGuiController getController() {
+		return controller;
+	}
+
+	public ControllerEvent setController(IGuiController controller) {
+		this.controller = controller;
+		return this;
+	}
+
+	public static class ControllerGetFXMLNodeEvent extends ControllerEvent {
+		public ControllerGetFXMLNodeEvent(IGuiController controller) {
+			super(controller);
+		}
 	}
 }

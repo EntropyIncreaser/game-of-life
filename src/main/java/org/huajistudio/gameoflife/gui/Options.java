@@ -21,9 +21,10 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.huajistudio.gameoflife.api.GameOfLifeAPI;
+import org.huajistudio.gameoflife.api.gui.IGuiHandler;
 import org.huajistudio.gameoflife.gui.controller.OptionsController;
 
-public class Options extends Application {
+public class Options extends Application implements IGuiHandler {
 	public OptionsController controller;
 
 	@Override

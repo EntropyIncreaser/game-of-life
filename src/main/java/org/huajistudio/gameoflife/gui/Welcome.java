@@ -48,10 +48,10 @@ public class Welcome extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		controller = new WelcomeController();
-		comboBox = controller.comboBox;
-		newLifeButton = controller.newLifeButton;
-		openLifeButton = controller.openLifeButton;
-		optButton = controller.optButton;
+		comboBox = controller.getFXMLNode("comboBox");
+		newLifeButton = controller.getFXMLNode("newLifeButton");
+		openLifeButton = controller.getFXMLNode("openLifeButton");
+		optButton = controller.getFXMLNode("optButton");
 
 		Reflections reflections = new Reflections("language", new ResourcesScanner());
 		Set<String> properties =

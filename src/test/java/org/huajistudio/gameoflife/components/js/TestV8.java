@@ -15,21 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.gui.controller;
+package org.huajistudio.gameoflife.components.js;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
-import org.huajistudio.gameoflife.api.gui.controller.IGuiController;
+import com.eclipsesource.v8.V8;
+import junit.framework.Assert;
+import org.junit.Test;
 
-import java.util.Locale;
-
-public class WelcomeController extends GridPane implements IGuiController {
-	@FXML private JFXButton newLifeButton, openLifeButton, optButton;
-	@FXML public JFXComboBox<Locale> comboBox;
-
-	public WelcomeController() {
-		load();
+public class TestV8 {
+	@Test
+	public void testV8() {
+		V8 runtime = V8.createV8Runtime();
+		int result = runtime.executeIntScript("var hello = 'hello';var world = 'world!';hello.concat(world).length");
+		Assert.assertEquals(result, 11);
+		runtime.release();
 	}
 }

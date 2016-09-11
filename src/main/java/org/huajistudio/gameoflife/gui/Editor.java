@@ -41,7 +41,7 @@ public class Editor extends Application {
 	private Grid worldGrid;
 	private AutomatonThread thread;
 
-	public EditorController controller;
+	private EditorController controller;
 	public Canvas worldCanvas;
 	public JFXButton playButton, saveButton;
 
@@ -62,9 +62,9 @@ public class Editor extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		thread = new AutomatonThread(worldGrid);
 		controller = new EditorController();
-		worldCanvas = controller.worldCanvas;
-		playButton = controller.playButton;
-		saveButton = controller.saveButton;
+		worldCanvas = controller.getFXMLNode("worldCanvas");
+		playButton = controller.getFXMLNode("playButton");
+		saveButton = controller.getFXMLNode("saveButton");
 
 		drawGrid(worldCanvas, worldGrid, Color.BLACK);
 
@@ -109,7 +109,7 @@ public class Editor extends Application {
 		worldGrid = new Grid(width, height);
 	}
 
-	public void drawGrid(Canvas canvas, Grid grid, Color color) {
+	private void drawGrid(Canvas canvas, Grid grid, Color color) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		gc.setFill(color);
