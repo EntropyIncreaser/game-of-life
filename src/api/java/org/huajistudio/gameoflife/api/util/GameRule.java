@@ -17,10 +17,12 @@
  */
 package org.huajistudio.gameoflife.api.util;
 
+import org.huajistudio.gameoflife.components.grid.EnumGridSimpleRule;
+import org.huajistudio.gameoflife.components.grid.GridMultipleRule;
+
 public class GameRule {
-	public static int reproductionAmount = 1;
-	public static int underPopulationAmount = 2;
-	public static int overPopulationAmount = 3;
+	public static EnumGridSimpleRule simpleRule = EnumGridSimpleRule.DEFAULT;
+	public static GridMultipleRule multipleRule = new GridMultipleRule(false, true);
 	/**
 	 * Cycle time (in milliseconds)
 	 */

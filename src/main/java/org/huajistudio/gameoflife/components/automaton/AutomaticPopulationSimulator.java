@@ -20,32 +20,23 @@ package org.huajistudio.gameoflife.components.automaton;
 import org.huajistudio.gameoflife.api.components.automaton.IAutomaticComponent;
 import org.huajistudio.gameoflife.api.components.automaton.SubscribeAutomaton;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
-import org.huajistudio.gameoflife.components.grid.GridHelper;
 import org.huajistudio.gameoflife.api.components.grid.GridPos;
+import org.huajistudio.gameoflife.components.grid.GridHelper;
 
 import static org.huajistudio.gameoflife.api.GameOfLifeAPI.LOGGER;
-import static org.huajistudio.gameoflife.api.util.GameRule.overPopulationAmount;
-import static org.huajistudio.gameoflife.api.util.GameRule.underPopulationAmount;
+import static org.huajistudio.gameoflife.api.util.GameRule.simpleRule;
 
 /**
  * Makes a qualified cell which can simulate the "under/over population" in the real world.
  */
 public class AutomaticPopulationSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
-	public void underPopulation(Grid grid) {
+	public void unstablePopulation(Grid grid) {
 		for (GridPos pos : grid.keySet()) {
-			if (GridHelper.getNearbyCellAmount(grid, pos) < underPopulationAmount && grid.getElement(pos).getValue()) {
+			if (simpleRule.couldStay(GridHelper.getNearbyCellAmount(grid, pos)) && grid.getElement(pos).getValue()) {
 				LOGGER.info("Under Population Detected " + pos + ", Nearby:" + GridHelper.getNearbyCellAmount(grid, pos));
 				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
 			}
-		}
-	}
-
-	@SubscribeAutomaton
-	public void overPopulation(Grid grid) {
-		for (GridPos pos : grid.keySet()) {
-			if (GridHelper.getNearbyCellAmount(grid, pos) > overPopulationAmount && grid.getElement(pos).getValue())
-				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
 		}
 	}
 }
