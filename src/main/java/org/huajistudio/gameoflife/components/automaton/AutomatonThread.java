@@ -57,7 +57,7 @@ public class AutomatonThread implements IAutomatonThread {
 				}
 			}
 
-			manager.cycle(grid);
+			grid = manager.cycle(grid);
 
 			try {
 				Thread.sleep(GameRule.cycleTime);

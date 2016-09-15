@@ -32,20 +32,22 @@ import static org.huajistudio.gameoflife.api.util.GameRule.underPopulationAmount
  */
 public class AutomaticPopulationSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
-	public void underPopulation(Grid grid) {
+	public Grid underPopulation(Grid grid) {
 		for (GridPos pos : grid.keySet()) {
 			if (GridHelper.getNearbyCellAmount(grid, pos) < underPopulationAmount && grid.getElement(pos).getValue()) {
 				LOGGER.info("Under Population Detected " + pos + ", Nearby:" + GridHelper.getNearbyCellAmount(grid, pos));
 				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
 			}
 		}
+		return grid;
 	}
 
 	@SubscribeAutomaton
-	public void overPopulation(Grid grid) {
+	public Grid overPopulation(Grid grid) {
 		for (GridPos pos : grid.keySet()) {
 			if (GridHelper.getNearbyCellAmount(grid, pos) > overPopulationAmount && grid.getElement(pos).getValue())
 				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
 		}
+		return grid;
 	}
 }

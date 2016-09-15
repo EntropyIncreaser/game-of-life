@@ -93,9 +93,4 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
     compile 'org.ow2.asm:asm:5.0.4'
     compile 'org.reflections:reflections:0.9.10'
-    compile 'com.eclipsesource.j2v8:j2v8_win32_x86:2.2.1'
-    compile 'com.eclipsesource.j2v8:j2v8_win32_x86_64:2.2.1'
-    compile 'com.eclipsesource.j2v8:j2v8_macosx_x86_64:2.2.1'
-    compile 'com.eclipsesource.j2v8:j2v8_linux_x86_64:3.0.0-SNAPSHOT'
-    compile 'com.eclipsesource.j2v8:j2v8_linux_x86:3.0.0-SNAPSHOT'
 }
