@@ -40,13 +40,4 @@ public class AutomaticPopulationSimulator implements IAutomaticComponent {
 		}
 		return grid;
 	}
-
-	@SubscribeAutomaton
-	public Grid overPopulation(Grid grid) {
-		for (GridPos pos : grid.keySet()) {
-			if (GridHelper.getNearbyCellAmount(grid, pos) > overPopulationAmount && grid.getElement(pos).getValue())
-				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
-		}
-		return grid;
-	}
 }
