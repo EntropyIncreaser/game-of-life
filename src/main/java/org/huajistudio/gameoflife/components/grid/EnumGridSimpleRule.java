@@ -17,13 +17,15 @@
  */
 package org.huajistudio.gameoflife.components.grid;
 
+import org.huajistudio.gameoflife.api.util.IGridSimpleRule;
+
 import java.util.Arrays;
 
 /**
  * The enumeration of the rule for a simple civilization in the grid.
  * @author Entropy_Increaser
  */
-public enum EnumGridSimpleRule {
+public enum EnumGridSimpleRule implements IGridSimpleRule {
 	/**
 	 * The default settings of the cellular automaton.
 	 */
@@ -55,18 +57,22 @@ public enum EnumGridSimpleRule {
 		this.isOpenSpace = isOpenSpace;
 	}
 
+	@Override
 	public boolean getSpaceType() {
 		return isOpenSpace;
 	}
 
+	@Override
 	public void setSpaceType(boolean type) {
 		isOpenSpace = type;
 	}
 
+	@Override
 	public boolean couldBorn(int count) {
 		return born[count];
 	}
 
+	@Override
 	public boolean couldStay(int count) {
 		return stay[count];
 	}

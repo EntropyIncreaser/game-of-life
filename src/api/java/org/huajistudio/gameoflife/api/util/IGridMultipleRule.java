@@ -17,14 +17,20 @@
  */
 package org.huajistudio.gameoflife.api.util;
 
-import org.huajistudio.gameoflife.components.grid.EnumGridSimpleRule;
-import org.huajistudio.gameoflife.components.grid.GridMultipleRule;
+import org.huajistudio.gameoflife.api.components.cell.Cell;
 
-public class GameRule {
-	public static IGridSimpleRule simpleRule = EnumGridSimpleRule.DEFAULT;
-	public static IGridMultipleRule multipleRule = new GridMultipleRule(false, true);
+public interface IGridMultipleRule {
+	public boolean getCanInvade();
+	public void setInvade(boolean type);
+	public boolean getComparingPopulation();
+	public void setComparingPopulation(boolean type);
+
 	/**
-	 * Cycle time (in milliseconds)
+	 * @param surround Cell[8]:
+	 *                 701
+	 *                 6*2
+	 *                 543
+	 * @param count the count of the civil for surround cells.
 	 */
-	public static int cycleTime = 300;
+	public Cell getWinner(Cell []surround, int []count);
 }

@@ -17,11 +17,14 @@
  */
 package org.huajistudio.gameoflife.components.grid;
 
+import org.huajistudio.gameoflife.api.components.cell.Cell;
+import org.huajistudio.gameoflife.api.util.IGridMultipleRule;
+
 /**
  * The class of the rule for multi civilizations in the grid.
  * @author Entropy_Increaser
  */
-public class GridMultipleRule {
+public class GridMultipleRule implements IGridMultipleRule {
 	private boolean canInvade, comparingPopulation;
 
 	/**
@@ -37,11 +40,28 @@ public class GridMultipleRule {
 		this.comparingPopulation = comparingPopulation;
 	}
 
+	@Override
 	public boolean getCanInvade() {
 		return canInvade;
 	}
 
+	@Override
+	public void setInvade(boolean type) {
+		canInvade = type;
+	}
+
+	@Override
 	public boolean getComparingPopulation() {
 		return comparingPopulation;
+	}
+
+	@Override
+	public void setComparingPopulation(boolean type) {
+		comparingPopulation = type;
+	}
+
+	@Override
+	public Cell getWinner(Cell[] surround, int[] count) {
+		return null; // TODO fix the logic
 	}
 }
