@@ -17,10 +17,11 @@
  */
 package org.huajistudio.gameoflife.components.automaton;
 
+import org.huajistudio.gameoflife.api.GameOfLifeAPI;
 import org.huajistudio.gameoflife.api.components.automaton.IAutomaticComponent;
 import org.huajistudio.gameoflife.api.components.automaton.SubscribeAutomaton;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
-import org.huajistudio.gameoflife.api.components.grid.GridPos;
+import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.components.grid.GridHelper;
 
 import static org.huajistudio.gameoflife.api.GameOfLifeAPI.LOGGER;
@@ -32,12 +33,12 @@ import static org.huajistudio.gameoflife.api.util.GameRule.simpleRule;
 public class AutomaticPopulationSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
 	public Grid unstablePopulation(Grid grid) {
-		for (GridPos pos : grid.keySet()) {
-			if (simpleRule.couldStay(GridHelper.getNearbyCellAmount(grid, pos)) && grid.getElement(pos).getValue()) {
-				LOGGER.info("Under Population Detected " + pos + ", Nearby:" + GridHelper.getNearbyCellAmount(grid, pos));
-				grid.setElement(pos, grid.getElement(pos).setValue(false).setRgba(new double[]{1.0f, 1.0f, 1.0f, 1.0f}));
-			}
-		}
+		grid.keySet().stream().filter(pos -> simpleRule.couldStay(GridHelper.getNearbyCellAmount(grid, pos)) && grid.getElement(pos).getValue()).forEach(pos -> {
+			LOGGER.info("Under Population Detected " + pos + ", Nearby:" + GridHelper.getNearbyCellAmount(grid, pos));
+			GameOfLifeAPI.EVENT_MANAGER.executeEvent(
+				new CellEvent.CellKilledEvent(grid, pos, grid.getElement(pos))
+			);
+		});
 		return grid;
 	}
 }

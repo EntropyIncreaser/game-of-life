@@ -18,6 +18,7 @@
 package org.huajistudio.gameoflife.event.listener;
 
 import javafx.scene.paint.Color;
+import org.huajistudio.gameoflife.GameOfLife;
 import org.huajistudio.gameoflife.api.components.cell.Cell;
 import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.api.event.IEventListener;
@@ -25,15 +26,19 @@ import org.huajistudio.gameoflife.api.event.SubscribeEvent;
 
 import static org.huajistudio.gameoflife.api.GameOfLifeAPI.LOGGER;
 
+@SuppressWarnings("unused")
 public class CellEventListener implements IEventListener {
 	@SubscribeEvent
 	public void onCellCreated(CellEvent.CellCreatedEvent event) {
 		LOGGER.debug("Cell has been created at " + event.getPosition());
+		event.getGrid().setElement(event.getPosition(), Cell.NORMAL_CELL);
+		GameOfLife.EDITOR.drawGrid(GameOfLife.EDITOR.worldCanvas, GameOfLife.EDITOR.getWorldGrid(), Color.BLACK);
 	}
 
 	@SubscribeEvent
 	public void onCellKilled(CellEvent.CellKilledEvent event) {
 		LOGGER.debug("Cell has been killed at " + event.getPosition());
-		event.getGrid().setElement(event.getPosition(), new Cell().setValue(false).setRgba(new double[]{Color.WHITE.getRed(),Color.WHITE.getGreen(),Color.WHITE.getBlue(),Color.WHITE.getOpacity()}));
+		event.getGrid().setElement(event.getPosition(), Cell.DEAD_CELL);
+		GameOfLife.EDITOR.drawGrid(GameOfLife.EDITOR.worldCanvas, GameOfLife.EDITOR.getWorldGrid(), Color.BLACK);
 	}
 }

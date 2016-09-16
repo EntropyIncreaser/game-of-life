@@ -18,11 +18,9 @@
 package org.huajistudio.gameoflife.components.grid;
 
 import com.google.common.collect.Lists;
-import org.huajistudio.gameoflife.api.GameOfLifeAPI;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
 import org.huajistudio.gameoflife.api.components.grid.GridPos;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,8 +44,6 @@ public class GridHelper {
 			pos.right().up(),
 			pos.up()
 		);
-
-		GameOfLifeAPI.LOGGER.info(Arrays.toString(poses.toArray()));
 
 		int i = 0;
 		for (GridPos pos1 : poses) {

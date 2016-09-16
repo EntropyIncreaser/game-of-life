@@ -17,14 +17,12 @@
  */
 package org.huajistudio.gameoflife.api.components.grid;
 
-import javafx.scene.paint.Color;
 import org.huajistudio.gameoflife.api.components.cell.Cell;
 import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.api.event.GridEvent;
 import org.huajistudio.gameoflife.api.util.ElementNotFoundException;
 
 import java.util.Iterator;
-import java.util.TreeMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -45,9 +43,7 @@ public class Grid implements Iterable<Cell> {
 		EVENT_MANAGER.executeEvent(new GridEvent.GridCreatedEvent(this));
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				Cell cell = new Cell().setValue(false).setRgba(new double[]{Color.WHITE.getRed(),Color.WHITE.getGreen(),Color.WHITE.getBlue(),Color.WHITE.getOpacity()});
-				matrix.put(new GridPos(i, j), cell);
-				EVENT_MANAGER.executeEvent(new CellEvent.CellCreatedEvent(this, new GridPos(i, j), cell));
+				EVENT_MANAGER.executeEvent(new CellEvent.CellCreatedEvent(this, new GridPos(i, j), Cell.DEAD_CELL));
 			}
 		}
 	}

@@ -109,7 +109,7 @@ public class Editor extends Application {
 		worldGrid = new Grid(width, height);
 	}
 
-	private void drawGrid(Canvas canvas, Grid grid, Color color) {
+	public void drawGrid(Canvas canvas, Grid grid, Color color) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		gc.setFill(color);
