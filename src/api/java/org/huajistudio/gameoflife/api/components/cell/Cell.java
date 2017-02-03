@@ -23,6 +23,9 @@ public class Cell implements IElement<Boolean> {
 	private boolean value;
 	private double[] rgba;
 
+	public static final Cell DEAD_CELL = new Cell().setValue(false).setRgba(new double[]{1.0, 1.0, 1.0, 1.0});
+	public static final Cell NORMAL_CELL = new Cell().setValue(true).setRgba(new double[]{0.0, 0.0, 0.0, 0.0});
+
 	@Override
 	public Boolean getValue() {
 		return value;

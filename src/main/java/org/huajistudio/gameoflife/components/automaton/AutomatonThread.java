@@ -17,6 +17,7 @@
  */
 package org.huajistudio.gameoflife.components.automaton;
 
+import org.huajistudio.gameoflife.GameOfLife;
 import org.huajistudio.gameoflife.api.components.automaton.AutomaticComponentManager;
 import org.huajistudio.gameoflife.api.components.automaton.IAutomatonThread;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
@@ -57,7 +58,8 @@ public class AutomatonThread implements IAutomatonThread {
 				}
 			}
 
-			manager.cycle(grid);
+			grid = manager.cycle(grid);
+			GameOfLife.EDITOR.setWorldGrid(grid);
 
 			try {
 				Thread.sleep(GameRule.cycleTime);

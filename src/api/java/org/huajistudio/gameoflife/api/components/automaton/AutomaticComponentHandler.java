@@ -20,7 +20,6 @@ package org.huajistudio.gameoflife.api.components.automaton;
 import org.huajistudio.gameoflife.api.GameOfLifeAPI;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class AutomaticComponentHandler implements Comparable<AutomaticComponentHandler> {
@@ -50,11 +49,12 @@ public class AutomaticComponentHandler implements Comparable<AutomaticComponentH
 		return annotation.priority().getPriority();
 	}
 
-	public void invoke(Grid grid) {
+	public Grid invoke(Grid grid) {
 		try {
-			method.invoke(component, grid);
-		} catch (InvocationTargetException | IllegalAccessException e) {
+			return (Grid) method.invoke(component, grid);
+		} catch (Exception e) {
 			GameOfLifeAPI.LOGGER.error("Exception when invoking AutomaticComponentHandler " + this.component + " for grid " + grid.toString(), e);
+			return new Grid(1,1);
 		}
 	}
 

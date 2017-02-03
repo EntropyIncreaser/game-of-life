@@ -52,9 +52,10 @@ public class AutomaticComponentManager {
 		reflections.getSubTypesOf(IAutomaticComponent.class).forEach(this::addAutomaticComponent);
 	}
 
-	public void cycle(Grid grid) {
+	public Grid cycle(Grid grid) {
 		for (AutomaticComponentHandler handler : componentHandlers) {
-			handler.invoke(grid);
+			grid = handler.invoke(grid);
 		}
+		return grid;
 	}
 }

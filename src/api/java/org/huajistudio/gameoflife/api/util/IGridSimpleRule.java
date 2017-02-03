@@ -15,18 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.huajistudio.gameoflife.components.js;
+package org.huajistudio.gameoflife.api.util;
 
-import com.eclipsesource.v8.V8;
-import junit.framework.Assert;
-import org.junit.Test;
-
-public class TestV8 {
-	@Test
-	public void testV8() {
-		V8 runtime = V8.createV8Runtime();
-		int result = runtime.executeIntScript("var hello = 'hello';var world = 'world!';hello.concat(world).length");
-		Assert.assertEquals(result, 11);
-		runtime.release();
-	}
+public interface IGridSimpleRule {
+	public boolean getSpaceType();
+	public void setSpaceType(boolean type);
+	public boolean couldBorn(int count);
+	public boolean couldStay(int count);
 }

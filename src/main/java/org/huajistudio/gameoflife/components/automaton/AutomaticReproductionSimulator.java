@@ -17,20 +17,27 @@
  */
 package org.huajistudio.gameoflife.components.automaton;
 
+import org.huajistudio.gameoflife.api.GameOfLifeAPI;
 import org.huajistudio.gameoflife.api.components.automaton.IAutomaticComponent;
 import org.huajistudio.gameoflife.api.components.automaton.SubscribeAutomaton;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
+import org.huajistudio.gameoflife.api.event.CellEvent;
 import org.huajistudio.gameoflife.components.grid.GridHelper;
-import org.huajistudio.gameoflife.api.components.grid.GridPos;
 
-import static org.huajistudio.gameoflife.api.util.GameRule.reproductionAmount;
+import static org.huajistudio.gameoflife.api.util.GameRule.simpleRule;
 
 public class AutomaticReproductionSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
-	public void reProduction(Grid grid) {
-		for (GridPos pos : grid.keySet()) {
-			if (GridHelper.getNearbyCellAmount(grid, pos) == reproductionAmount && (!grid.getElement(pos).getValue()))
-				grid.setElement(pos, grid.getElement(pos).setValue(true).setRgba(new double[]{0.0f, 0.0f, 0.0f, 0.0f}));
-		}
+	public Grid reProduction(Grid grid) {
+		grid.keySet().stream().filter(pos ->
+			simpleRule.couldBorn(GridHelper.getNearbyCellAmount(grid, pos))
+				&& (!grid.getElement(pos).getValue()))
+			.forEach(
+				pos ->
+					GameOfLifeAPI.EVENT_MANAGER.executeEvent(
+						new CellEvent.CellKilledEvent(grid, pos, grid.getElement(pos))
+					)
+			);
+		return grid;
 	}
 }

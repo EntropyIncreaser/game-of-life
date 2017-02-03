@@ -23,6 +23,7 @@ import org.huajistudio.gameoflife.api.components.grid.Grid;
 
 public class AutomaticEvolutionSimulator implements IAutomaticComponent {
 	@SubscribeAutomaton
-	public void evolve(Grid grid) {
+	public Grid evolve(Grid grid) {
+		return grid;
 	}
 }
