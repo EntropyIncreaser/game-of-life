@@ -25,6 +25,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.huajistudio.gameoflife.GameOfLife;
 import org.huajistudio.gameoflife.api.GameOfLifeAPI;
 import org.huajistudio.gameoflife.api.components.grid.Grid;
 import org.huajistudio.gameoflife.api.components.grid.GridPos;
@@ -43,7 +44,7 @@ public class Editor extends Application {
 
 	private EditorController controller;
 	public Canvas worldCanvas;
-	public JFXButton playButton, saveButton;
+	public JFXButton playButton, saveButton, backButton;
 
 	public Grid getWorldGrid() {
 		return worldGrid;
@@ -65,6 +66,7 @@ public class Editor extends Application {
 		worldCanvas = controller.getFXMLNode("worldCanvas");
 		playButton = controller.getFXMLNode("playButton");
 		saveButton = controller.getFXMLNode("saveButton");
+		backButton = controller.getFXMLNode("backButton");
 
 		drawGrid(worldCanvas, worldGrid, Color.BLACK);
 
@@ -98,7 +100,13 @@ public class Editor extends Application {
 			}
 		});
 
-
+		backButton.setOnAction(event -> {
+			try {
+				GameOfLife.WELCOME.start(primaryStage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 
 		primaryStage.setScene(new Scene(controller));
 		primaryStage.setTitle(GameOfLifeAPI.I18N.parse("window.editor.title"));

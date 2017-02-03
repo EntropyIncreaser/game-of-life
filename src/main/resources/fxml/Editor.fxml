@@ -23,4 +23,10 @@
 	           text="%window.editor.button.save.label"
 	           GridPane.rowIndex="1"
 	           GridPane.columnIndex="1"/>
+
+	<JFXButton fx:id="backButton"
+	           style="-fx-background-color:#5264AE; -fx-text-fill: white"
+	           text="%window.editor.button.back.label"
+	           GridPane.rowIndex="1"
+	           GridPane.columnIndex="2"/>
 </fx:root>

@@ -25,7 +25,7 @@ import org.huajistudio.gameoflife.api.gui.controller.IGuiController;
 
 public class EditorController extends GridPane implements IGuiController {
 	@FXML public Canvas worldCanvas;
-	@FXML public JFXButton playButton, saveButton;
+	@FXML public JFXButton playButton, saveButton, backButton;
 
 	public EditorController() {
 		load();
